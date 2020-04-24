@@ -1,0 +1,21 @@
+
+/* textbox */
+input.error {
+    background: url("disabled.png") no-repeat scroll right center #ffebef;
+    color: #480000;
+    border-color: #f50000 !important;
+}
+
+input.valid {
+    background: url("success2.png") no-repeat scroll right center #e3ffe5;
+    border-color: #00f500 !important;
+    color: #002f00;
+}
+
+span.form-error.help-block {
+    color: red;
+    display: block;
+    margin-top: 6px;
+    padding-left: 0;
+    font-size: 12px;
+}
