@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
 /* line 1, ../../Arafath/CL/December/234. Finance/HTML/scss/_extend.scss */
 .flex-center-start {
   display: -webkit-box;
@@ -26,7 +26,7 @@
 /* Large Mobile :480px. */
 /* line 6, ../../Arafath/CL/December/234. Finance/HTML/scss/theme-default.scss */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-weight: normal;
   font-style: normal;
 }
@@ -79,7 +79,7 @@ button {
 
 /* line 40, ../../Arafath/CL/December/234. Finance/HTML/scss/theme-default.scss */
 h1, h2, h3, h4, h5 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   color: #001D38;
 }
 
@@ -111,7 +111,7 @@ p {
   line-height: 28px;
   color: #7A838B;
   margin-bottom: 13px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 69, ../../Arafath/CL/December/234. Finance/HTML/scss/theme-default.scss */
@@ -411,7 +411,7 @@ h3 {
   color: #131313;
   display: inline-block;
   padding: 14px 44px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 14px;
   font-weight: 400;
   border: 0;
@@ -437,18 +437,19 @@ h3 {
 /* line 24, ../../Arafath/CL/December/234. Finance/HTML/scss/_btn.scss */
 .boxed-btn3 {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
-  background: #33D4D6;
+  background: linear-gradient(-90deg, #003333,#009999);
   color: #fff;
+  opacity: 0.7;
   display: inline-block;
   padding: 11px 29px 13px 29px;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-family: "Kanit", sans-serif;
+  font-size: 22px;
   font-weight: 500;
   border: 0;
   border: 1px solid transparent;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 50px;
   text-align: center;
   color: #fff !important;
   text-transform: capitalize;
@@ -458,6 +459,35 @@ h3 {
   transition: 0.3s;
   cursor: pointer;
 }
+
+
+.boxed-btn5 {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
+  background: #FFFFFF;
+  color: #000000;
+  opacity: 0.7;
+  display: inline-block;
+  padding: 11px 29px 13px 29px;
+  font-family: "Kanit", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  border: 0;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 50px;
+  text-align: center;
+  color: #000000 !important;
+  text-transform: capitalize;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  
+}
+
+
 
 /* line 43, ../../Arafath/CL/December/234. Finance/HTML/scss/_btn.scss */
 .boxed-btn3:hover {
@@ -475,7 +505,7 @@ h3 {
 .boxed-btn4 {
   display: inline-block;
   padding: 11px 29px 13px 29px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 16px;
   font-weight: 500;
   -webkit-border-radius: 5px;
@@ -514,7 +544,7 @@ h3 {
   color: #F91842 !important;
   display: inline-block;
   padding: 14px 31px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 15px;
   font-weight: 500;
   border: 0;
@@ -570,7 +600,7 @@ h3 {
   font-weight: 600;
   display: inline-block;
   padding: 12px 36px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   cursor: pointer;
 }
 
@@ -684,7 +714,7 @@ h3 {
   color: #7A838B;
   margin-bottom: 0;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 @media (max-width: 767px) {
@@ -921,7 +951,7 @@ h3 {
 
 /* line 27, ../../Arafath/CL/December/234. Finance/HTML/scss/_header.scss */
 .header-area .main-header-area.details_nav {
-  background: #001D38;
+  background: #ffffff;
 }
 
 @media (max-width: 767px) {
@@ -1117,7 +1147,7 @@ h3 {
   font-weight: 350;
   display: inline-block;
   padding: 35px 0px 35px 0px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   position: relative;
   text-transform: capitalize;
 }
@@ -1236,7 +1266,8 @@ h3 {
   transition: transform 500ms ease, background 500ms ease;
   -webkit-transition: transform 500ms ease, background 500ms ease;
   box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.1);
-  background: rgba(0, 29, 56, 0.8);
+  background: #ffffff;
+  opacity : 0.9;
 }
 
 @media (max-width: 767px) {
@@ -1423,7 +1454,7 @@ h3 {
 
 /* line 39, ../../Arafath/CL/December/234. Finance/HTML/scss/_slider.scss */
 .slider_area .single_slider .slider_text h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 60px;
   font-weight: 400;
   line-height: 74px;
@@ -1471,7 +1502,7 @@ h3 {
   font-size: 30px;
   font-weight: 400;
   color: #F91842;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   margin-bottom: 24px;
 }
 
@@ -1533,7 +1564,7 @@ h3 {
   font-size: 14px;
   color: #fff;
   font-weight: #000;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   padding: 5px 19px;
   display: inline-block;
   margin: 0 3px;
@@ -1598,7 +1629,7 @@ h3 {
   font-size: 16px;
   font-weight: 400;
   color: #7A838B;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 149, ../../Arafath/CL/December/234. Finance/HTML/scss/_slider.scss */
@@ -1842,7 +1873,7 @@ h3 {
   font-weight: 400;
   font-size: 70px;
   margin-bottom: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   margin-bottom: 10px;
 }
 
@@ -1852,7 +1883,7 @@ h3 {
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 30, ../../Arafath/CL/December/234. Finance/HTML/scss/_counter.scss */
@@ -2481,7 +2512,7 @@ input[type=checkbox] + label {
   margin: 0.2em;
   cursor: pointer;
   padding: 0.2em;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 9, ../../Arafath/CL/December/234. Finance/HTML/scss/_check.scss */
@@ -2586,7 +2617,7 @@ input[type="checkbox"] + label {
 /* line 101, ../../Arafath/CL/December/234. Finance/HTML/scss/_check.scss */
 .last_range label {
   font-size: 16px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   color: #001D38;
   font-weight: 400;
 }
@@ -2595,7 +2626,7 @@ input[type="checkbox"] + label {
 p #amount {
   font-size: 14px;
   color: #919191 !important;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-weight: 400 !important;
 }
 
@@ -2772,7 +2803,7 @@ p #amount {
 /* line 103, ../../Arafath/CL/December/234. Finance/HTML/scss/_gallery.scss */
 .portfolio_details_area .portfolio_details_content p {
   font-size: 16px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
   color: #727272;
   line-height: 28px;
 }
@@ -2807,12 +2838,12 @@ p #amount {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background: #fff;
+  background:(#ffffff);
 }
 
 /* line 7, ../../Arafath/CL/December/234. Finance/HTML/scss/_footer.scss */
 .footer p {
-  font-family: "Roboto", sans-serif !important;
+  font-family: "Kanit", sans-serif !important;
 }
 
 /* line 10, ../../Arafath/CL/December/234. Finance/HTML/scss/_footer.scss */
@@ -2850,7 +2881,7 @@ p #amount {
   color: #040E27;
   text-transform: capitalize;
   margin-bottom: 40px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 @media (max-width: 767px) {
@@ -2943,7 +2974,7 @@ p #amount {
 .footer .footer_top .footer_widget ul li a {
   color: #7A838B;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 98, ../../Arafath/CL/December/234. Finance/HTML/scss/_footer.scss */
@@ -2968,7 +2999,7 @@ p #amount {
   border: none;
   border: 1px solid #E8E8E8;
   border-radius: 5px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 118, ../../Arafath/CL/December/234. Finance/HTML/scss/_footer.scss */
@@ -3000,7 +3031,7 @@ p #amount {
   right: 5px;
   font-size: 13px;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 146, ../../Arafath/CL/December/234. Finance/HTML/scss/_footer.scss */
@@ -3228,7 +3259,7 @@ p #amount {
   color: #fff;
   font-size: 16px;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 1, ../../Arafath/CL/December/234. Finance/HTML/scss/_testmonial.scss */
@@ -5758,7 +5789,7 @@ h6 {
 /* line 537, ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
 .blog_details p {
   margin-bottom: 30px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 542, ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
@@ -6196,7 +6227,7 @@ h6 {
   background: #fff;
   padding: 15px 15px 15px 20px;
   border-left: 2px solid;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -6510,7 +6541,7 @@ h6 {
   margin-bottom: 10px;
   color: #777777;
   font-size: 15px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 /* line 1393, ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
@@ -6905,5 +6936,190 @@ h6 {
   margin-right: 10px;
   font-size: 12px;
 }
+
+
+/* line , ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
+.font01 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Kanit", sans-serif;
+  color : #000000;
+}
+
+
+/* line , ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
+.font02 {
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Kanit", sans-serif;
+  color : #000000;
+}
+
+
+/* line , ../../Arafath/CL/December/234. Finance/HTML/scss/_blog.scss */
+.font03 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Kanit", sans-serif;
+  color : #009999;
+}
+
+
+.font04 {
+  font-size: 20px;
+  font-family: "Kanit", sans-serif;
+  color : #FFFFFF;
+  text-align: center;
+}
+
+
+.boxed-box01 {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
+  background: linear-gradient(#3e8f90, #1f616d); /* Standard syntax */
+  opacity: 0.8;
+  display: inline-block;
+  padding: 11px 29px 13px 29px;
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;    
+  padding: 50px;
+  text-align: center;
+}
+
+
+.btn6 {
+
+  background: #f5851f;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: inline-block;
+  padding: 11px 29px 13px 29px;
+  width: 400px;
+  font-family: "Kanit", sans-serif;
+  font-size: 16px;
+  border: 0;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 50px;
+  text-align: center;
+  text-transform: capitalize;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  
+}
+
+
+
+.p1 {
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #FFFFFF;
+  margin-bottom: 13px;
+  font-family: "Kanit", sans-serif;
+}
+
+
+.p2 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #FFFFFF;
+  margin-bottom: 13px;
+  font-family: "Kanit", sans-serif;
+}
+
+
+.footer{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #FFFFFF;
+  margin-bottom: 13px;
+  font-family: "Kanit", sans-serif;
+}
+
+
+.font05 {
+  font-size: 22px;
+  font-family: "Kanit", sans-serif;
+  color : #f5851f;
+  text-align: center;
+  font-weight: bold;
+}
+
+.font06 {
+  font-size: 18px;
+  font-family: "Kanit", sans-serif;
+  color : #000000;
+  line-height : 40px;
+}
+
+
+.btn7 {
+
+  background: #f5851f;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: inline-block;
+  height: 35px;
+  width: 60px;
+  font-family: "Kanit", sans-serif;
+  font-size: 12px;
+  border: 0;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 50px;
+  text-align: center;
+  text-transform: capitalize;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  
+}
+
+h2 {
+    color: #4C4C4C;
+    word-spacing: 5px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom:30px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.ion-minus{
+    padding:0px 10px;
+}
+
+.team{
+	background-color:#f2f4f3;
+	padding:60px 0px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.team h4 {
+    margin-top: 20px;
+    color: #5db4c0;
+}
+
+.team .fa{
+    color: #5db4c0;
+    font-size: 18px;
+    margin-top: 10px;
+    padding: 3px;
+}.
+
+
+
+
+
+
 
 /*# sourceMappingURL=style.css.map */
