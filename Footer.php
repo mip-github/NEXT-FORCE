@@ -88,7 +88,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-top-title"><h3 class="title-footer" >Contact</h3></div>
                             <p><span>Address:</span>351 Everymail Nonthburi 10890</p>
-                            <p><span>Email :</span>T10@kalungla.com</p>
+                            <p><span>Email :</span>T10@kalungka.com</p>
 							<p><span>Phone :</span>0876865467</p>
                     </div>
 					<div class="col-md-3 col-sm-6">
@@ -109,11 +109,8 @@
 							<button class="btn7" type="send">Send</button>
 						</td>
                     </div>
-					
                 </div>
             </div>
-			
-            
         </div>
        
     </footer>

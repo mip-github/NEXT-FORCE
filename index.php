@@ -13,6 +13,10 @@ $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
 $stmt->execute();
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
 $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
+
+$sql2 = "SELECT * FROM project";
+$result2 = mysqli_query($conn, $sql2);
+$row1 = mysqli_fetch_object($result2);
 ?>
 
 
@@ -21,6 +25,8 @@ $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
 <?php require_once __DIR__ . '/require/head.php';?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css">
 <link href="css/validator.css" rel="stylesheet">
 <style>
 a.linkhover:hover {
@@ -85,87 +91,7 @@ div.single-input  {
 </style>
 
 <body>
-    <header>
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid ">
-                    <div class="header_bottom_border">
-                        <div class="row align-items-center">
-                            <div class="col-xl-3 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.html">
-                                        <img src="pic/logo.png" alt="" style="width: 150px; height: 70px;">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-7">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="#">About us</a></li>
-                                            <li><a href="#">Project</a></li>
-                                            <li><a href="#">Investment</a></li>
-                                            <li><a href="#">Team</a></li>
-                                            <li><a href="#">Roadmap</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            
-                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                                <div class="Appointment">
-                                    <!-- <div class="d-none d-lg-block">
-                                        <a class="linkhover" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                        <font style="font-size: 26px; font-family: 'Roboto', sans-serif; font-weight: 350;">Sign in</font>
-                                        </a>
-                                    </div> -->
-                                    <?php if (isset($_SESSION['MEMBER_ID'])) { ?> 
-                                        <div class="col-xl-10 col-lg-7 d-none d-lg-block">
-                                            <div class="Appointment">
-                                                <div class="phone_num d-none d-xl-block">
-                                                <font style='font-size: 26px; font-family: 'Roboto', sans-serif; font-weight: 350;'> | <?php echo $_SESSION['MEMBER_NAME'];?> <?php echo $_SESSION['MEMBER_SERNAME'];?></font>
-                                                   
-                                                </div>
-                                                <div class="d-none d-lg-block">
-                                                     <div class="profile-userpic">
-					                                    <img src="profile_kyc/<?php echo $row['MEMBER_PHOTO'];?>" class="img-responsive" alt="">
-				                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>        
-                                    <?php 
-                                    
-                                    }else{
-                                            echo "<div class='d-none d-lg-block'>
-                                                    <a class='linkhover' href='#' data-toggle='modal' data-target='#loginModal'>
-                                                        <font style='font-size: 26px; font-family: 'Roboto', sans-serif; font-weight: 350;'>Sign in</font>
-                                                    </a>
-                                                  </div>
-                                                &emsp;
-                                                <font style='font-size: 26px; font-family: 'Roboto', sans-serif; font-weight: 350;'> /</font>
-                                                &emsp;
-                                                  <div class='d-none d-lg-block'>
-                                                    <a class='linkhover' href='#' data-toggle='modal' data-target='#exampleModal'>
-                                                        <font
-                                                            style='font-size: 26px; font-family: 'Roboto', sans-serif; font-weight: 350;'>
-                                                            Sign up</font>
-                                                    </a>
-                                                  </div>";
-                         
-                                    ?>    
-                                    <?php } ?>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </header>
+    <header> <?php include_once 'require/header.php'; ?> </header>
     <!-- header-end -->
 
     <div class="slider_area">
@@ -185,8 +111,8 @@ div.single-input  {
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="boxed-box01">
-                                <div class="font04">Kalungka CIO Finishes in:</div></br>
-									<script src="js/Countdown.js"></script>
+                                <div class="font04">Kalungka CIO Finishes in:</div>
+                                    <div data-date="<?php echo $row1->PROJECT_END; ?>" id="count-down"></div>
 
                             <div>
                                 <button class="btn6" type="submit">Buy coin 15% off</button></br></br>
@@ -1071,6 +997,8 @@ div.single-input  {
 <script src="validator/security.js"></script>
 <script src="validator/file.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#next-1").click(function() {
@@ -1213,35 +1141,9 @@ function readURL(input) {
         }));
     });
 </script>
-<!-- <script>
- $(document).on('submit', '#register_form', function(){
-    var register_form=$(this);
-    var form_data=JSON.stringify(register_form.serializeObject());
-    e.preventDefault();
-    $.ajax({
-        url: "api/create_user.php",
-        type : "POST",
-        contentType : 'application/json',
-        data:  new FormData(this),
-        cache: false,
-        processData:false,
-        success: function(response) {
-        console.log(response)
-        if(response=="Error"){
-            swal("หมายเลขบัตรประชาขนนี้ได้ถูกใช้งานไปแล้ว !!", {
-            icon: "warning",
-            });
-        }
-        if(response=="Success"){
-            swal("Membership is complete. Please verify your identity via email.", {
-            icon: "success",
-                });
-            }
-        },
-        error: function(){} 	        
+<script type="text/javascript">
+    $(function () {
+        $("#count-down").TimeCircles();
     });
-    return false;
-});
-</script> -->
+</script>
 </html>
-

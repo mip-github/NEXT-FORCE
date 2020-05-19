@@ -1,0 +1,301 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Kalungka</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+        
+        <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="plugins/ionicons/dist/css/ionicons.min.css">
+        <link rel="stylesheet" href="plugins/icon-kit/dist/css/iconkit.min.css">
+        <link rel="stylesheet" href="plugins/perfect-scrollbar/css/perfect-scrollbar.css">
+        <link rel="stylesheet" href="css/theme.min.css">
+        <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="wrapper">
+            <header class="header-top" header-theme="light">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between">
+                        <div class="top-menu d-flex align-items-center">
+                            <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
+                            <div class="header-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ik ik-x"></i></span>
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon search-btn"><i class="ik ik-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+            </header>
+
+            <div class="page-wrap">
+                <div class="app-sidebar colored">
+                    <div class="sidebar-header">
+                        <a class="header-brand" href="index.html">
+						    <img src="pic/ic_menu.png">
+                            <img src="pic/logo.png" class = "text" style="width: 60px; height: 30px;" >
+                        </a>
+                        <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
+                        <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
+                    </div>
+                    
+                    <div class="sidebar-content">
+                        <div class="nav-container">
+									<div class="card-body">
+                                        <div class="text-center"> 
+                                            <img src="pic/user3.jpg" class="rounded-circle" width="50" />
+                                            <h4 class="card-title mt-10">สุขใจ ใจสุข</h4>
+                                            <p class="card-subtitle">Admin T10 สาขา A</p>
+                                            
+                                        </div>
+                                    </div>
+                            <nav id="main-menu-navigation" class="navigation-main">
+                                
+                                <div class="nav-item">
+                                    <a href=""><span class="text-center">หน้าหลัก</span></a>
+                                </div>
+                                <div class="nav-item">
+                                    <a href="admin-home.html"><span class="text-center">ตรวจสอบการโอนเงิน</span></a> <!--<span class="badge badge-success">New</span></a> -->
+                                </div>
+                                <div class="nav-item">
+                                    <a href="admin-appeal.html"><span class="text-center">รับเรื่องร้องเรียน</span> </a>
+                                </div>
+								<div class="nav-item">
+                                    <a href=""><span class="text-center">ออกจากระบบ</span> </a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+				
+				<!--Tab-->
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            
+                            <div class="col-lg-8 col-md-7">
+                                <div class="card">
+                                    <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="pills-timeline-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-timeline" aria-selected="true">ทั้งหมด(200)</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-profile" aria-selected="false">เปลี่ยนรหัสผ่านไม่ได้ (50)</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-setting" aria-selected="false">เรื่องร้องเรียน1  (20)</a>
+                                        </li>
+										<li class="nav-item">
+                                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-setting" aria-selected="false">เรื่องร้องเรียน2 (20)</a>
+                                        </li>
+										<li class="nav-item">
+                                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-setting" aria-selected="false">เรื่องร้องเรียน3 (20)</a>
+                                        </li>
+										<li class="nav-item">
+                                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-setting" aria-selected="false">อื่นๆ (20)</a>
+                                        </li>
+                                    </ul>
+									<!--Box1-->
+								<table>
+									<tr>
+										<td>
+											<div class="card-body">
+												<div class="modal-dialog mt-0 mb-0" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<img src="pic/user.jpg" class="rounded-circle" width="60" />
+															<h5 class="modal-title">พีรดา สุขใจ</br>
+															<p>รหัสสมาชิก 1234567890A</p>
+															</h5>
+															
+														</div>
+														<div class="modal-body">
+															<table>
+															<tr>
+															<label>หัวข้อเรื่องที่ร้องเรียน : </label> <span>เปลี่ยนรหัสผ่านไม่ได้</span></br>
+															<label>ข้อความส่งถึงเจ้าหน้าที่ : </label> <span>Lorem ipsum sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</span></br>
+															</tr>
+															<tr>
+															<label>วัน/เดือน/ปี ที่เกิดปัญหา : </label> <span>20/02/2020</span>
+															</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">อ่านต่อ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									<!--Box2-->
+										<td>
+											<div class="card-body">
+												<div class="modal-dialog mt-0 mb-0" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<img src="pic/user1.jpg" class="rounded-circle" width="60" />
+															<h5 class="modal-title">พีรดา สุขใจ</br>
+															<p>รหัสสมาชิก 1234567890A</p>
+															</h5>
+															
+														</div>
+														<div class="modal-body">
+															<table>
+															<tr>
+															<label>หัวข้อเรื่องที่ร้องเรียน : </label> <span>เปลี่ยนรหัสผ่านไม่ได้</span></br>
+															<label>ข้อความส่งถึงเจ้าหน้าที่ : </label> <span>Lorem ipsum sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</span></br>
+															</tr>
+															<tr>
+															<label>วัน/เดือน/ปี ที่เกิดปัญหา : </label> <span>20/02/2020</span>
+															</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">อ่านต่อ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<!--Box3-->
+									<tr>
+										<td>
+											<div class="card-body">
+												<div class="modal-dialog mt-0 mb-0" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<img src="pic/user1.jpg" class="rounded-circle" width="60" />
+															<h5 class="modal-title">พีรดา สุขใจ</br>
+															<p>รหัสสมาชิก 1234567890A</p>
+															</h5>
+															
+														</div>
+														<div class="modal-body">
+															<table>
+															<tr>
+															<label>หัวข้อเรื่องที่ร้องเรียน : </label> <span>เปลี่ยนรหัสผ่านไม่ได้</span></br>
+															<label>ข้อความส่งถึงเจ้าหน้าที่ : </label> <span>Lorem ipsum sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</span></br>
+															</tr>
+															<tr>
+															<label>วัน/เดือน/ปี ที่เกิดปัญหา : </label> <span>20/02/2020</span>
+															</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">อ่านต่อ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									<!--Box4-->
+										<td>
+											<div class="card-body">
+												<div class="modal-dialog mt-0 mb-0" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<img src="pic/user2.jpg" class="rounded-circle" width="60" />
+															<h5 class="modal-title">พีรดา สุขใจ</br>
+															<p>รหัสสมาชิก 1234567890A</p>
+															</h5>
+															
+														</div>
+														<div class="modal-body">
+															<table>
+															<tr>
+															<label>หัวข้อเรื่องที่ร้องเรียน : </label> <span>เปลี่ยนรหัสผ่านไม่ได้</span></br>
+															<label>ข้อความส่งถึงเจ้าหน้าที่ : </label> <span>Lorem ipsum sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</span></br>
+															</tr>
+															<tr>
+															<label>วัน/เดือน/ปี ที่เกิดปัญหา : </label> <span>20/02/2020</span>
+															</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">อ่านต่อ</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</table>
+								<!--End Box-->
+                                </div>
+                            </div>
+							
+					<!--เรื่องร้องเรียน-->
+							<div class="col-lg-4 col-md-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-header">
+											<h3>เรื่องร้องเรียน</h3>
+										</div>
+										
+												
+													
+														<div class="modal-header">
+															<img src="pic/user2.jpg" class="rounded-circle" width="60" />
+															<h5 class="modal-title">พีรดา สุขใจ</br>
+															<p>รหัสสมาชิก 1234567890A</p>
+															</h5>
+															
+														</div>
+														<div class="modal-body">
+															<table>
+															<tr>
+															<label>หัวข้อเรื่องที่ร้องเรียน : </label> <span>เปลี่ยนรหัสผ่านไม่ได้</span></br>
+															<label>ข้อความส่งถึงเจ้าหน้าที่ : </label> <span>Lorem ipsum sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</span></br></br>
+															</tr>
+															<tr>
+															<label>ไฟล์ภาพ : </label> </br></br></br></br></br>
+															</tr>
+															<tr>
+															<label>วัน/เดือน/ปี ที่เกิดปัญหา : </label> <span>20/02/2020</span>
+															</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">ดูโปรไฟล์</button>
+														</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+				
+			
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+        <script src="plugins/popper.js/dist/umd/popper.min.js"></script>
+        <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+        <script src="plugins/screenfull/dist/screenfull.js"></script>
+        <script src="dist/js/theme.min.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
