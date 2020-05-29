@@ -17,6 +17,22 @@ $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
 $sql2 = "SELECT * FROM project";
 $result2 = mysqli_query($conn, $sql2);
 $row1 = mysqli_fetch_object($result2);
+
+$sql3 = "SELECT * FROM project";
+$stmt=$db->prepare($sql3);
+$stmt->execute();
+$row3=$stmt->fetch(PDO::FETCH_ASSOC);
+
+$PROJECT_PRICE = $row3['PROJECT_PRICE'];
+$PROJECT_ID = $row3['PROJECT_ID'];
+$PROJECT_SOFT_CAP = $row3['PROJECT_SOFT_CAP'];
+$PROJECT_HARD_CAP = $row3['PROJECT_HARD_CAP'];
+$PROJECT_NUM_UNIT = $row3['PROJECT_NUM_UNIT'];
+
+$PROJECT_MAX = $PROJECT_PRICE * 100 / $PROJECT_PRICE;
+$PROJECT_SOFTCAP = $PROJECT_SOFT_CAP * 100 / $PROJECT_PRICE ;
+$PROJECT_HARDCAP = $PROJECT_HARD_CAP * 100 / $PROJECT_PRICE ;
+$PROJECT_REAL = $PROJECT_NUM_UNIT * 100 / $PROJECT_PRICE;
 ?>
 
 
@@ -27,6 +43,7 @@ $row1 = mysqli_fetch_object($result2);
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css">
+<link href="src/jquery.stepProgressBar.css" rel="stylesheet" type="text/css">
 <link href="css/validator.css" rel="stylesheet">
 <style>
 a.linkhover:hover {
@@ -115,7 +132,8 @@ div.single-input  {
                                     <div data-date="<?php echo $row1->PROJECT_END; ?>" id="count-down"></div>
 
                             <div>
-                                <button class="btn6" type="submit">Buy coin 15% off</button></br></br>
+                                <button class="btn6" type="submit">Buy coin 15% off</button></br>
+                                <div id="myGoal" style="max-height: 80px;"></div><br>
                             </div>
 							
 							<div class="p2">Fixed token edition :</div>
@@ -999,6 +1017,29 @@ div.single-input  {
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.js"></script>
+<script src="src/jquery.stepProgressBar.js"></script>
+<script>
+$('#myGoal').stepProgressBar({
+  currentValue: <?=$PROJECT_REAL?>,
+  steps: [
+    {
+      value: <?=$PROJECT_SOFTCAP?>,
+      bottomLabel: '<h6>Soft Cap</h6>'
+    },
+    {
+      value: <?=$PROJECT_HARDCAP?>,
+      bottomLabel: '<h6>Hard Cap</h6>'
+    },
+    {  
+      value: 100, 
+      bottomLabel: '<h6>Max</h6>',
+      mouseOver: function() { alert('mouseOver'); },
+      click: function() { alert('click'); }
+    }
+  ],
+  unit: '$'
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("#next-1").click(function() {
