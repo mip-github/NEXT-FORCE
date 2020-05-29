@@ -8,8 +8,14 @@
                 $sql = "SELECT 
                 member.*,
                 account_bank.*,
-                account_bank_type.*
-                FROM member 
+                account_bank_type.*,
+                provinces.*,
+                amphures.*,
+                districts.*
+                FROM member
+                LEFT JOIN provinces ON(member.PROVINCE_ID = provinces.id)
+                LEFT JOIN amphures ON(member.AMPHURE_ID = amphures.id) 
+                LEFT JOIN districts ON(member.DISTRINCT_ID = districts.id) 
                 LEFT JOIN account_bank ON(member.MEMBER_CARD_NUMBER = account_bank.MEMBER_ID)
                 LEFT JOIN account_bank_type ON(account_bank.ACCOUNT_TYPE_ID = account_bank_type.ACCOUNT_TYPE_ID)
                 WHERE MEMBER_CARD_NUMBER = :ID";

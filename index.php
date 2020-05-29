@@ -728,9 +728,9 @@ div.single-input  {
                                 </div>
                             </div><br><br> <br><br>
                             <div class="modal-footer">
+                                <button type="button" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;" data-dismiss="modal"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ปิดหน้าต่าง</font></button>
                                 <button type="button" name="submit" id="next-1" style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px;
                                 padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ถัดไป</font></button>
-                                <button type="button" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;" data-dismiss="modal"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ปิดหน้าต่าง</font></button>
                             </div>
                         </div>
                         <div id="second">
@@ -768,9 +768,9 @@ div.single-input  {
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" id="prev-2" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ย้อนกลับ</font></button>
                                 <button type="button" id="next-2" style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px;
                                 padding: 5px 30px;" disabled><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ถัดไป</font></button>
-                                <button type="button" id="prev-2" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ย้อนกลับ</font></button>
                             </div>
                         </div>
                         <div id="third">
@@ -803,11 +803,17 @@ div.single-input  {
                                                         style="color: #000000; font-size: 18px; font-family: 'DB Heavent', DB Heavent;">
                                                         ชื่อธนาคาร</font>
                                                 </b></label>
-                                            <select class="form-control form-control-md" name=""
-                                                id="">
-                                                <option value="">เลือกธนาคาร</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
+                                                <select class="form-control" id="BANK_ID" name="BANK_ID">
+                                                <option>-- เลือกธนาคาร --</option>
+                                                <?php
+
+                                                    $sql_bank = "SELECT * FROM bank_thailand";
+                                                    $res_bank = mysqli_query($conn, $sql_bank);
+                                                    while ($row_bank = mysqli_fetch_assoc($res_bank)) {
+                                                        echo '<option value="'.$row_bank['BANK_ID'].'">'.$row_bank['BANK_NAME'].'</option>';                
+                                                    }
+
+                                                ?>  
                                             </select>
                                         </div>
                                     </div>
@@ -829,12 +835,18 @@ div.single-input  {
                                                         style="color: #000000; font-size: 18px; font-family: 'DB Heavent', DB Heavent;">
                                                         เลือกประเภทบัญชี</font>
                                                 </b></label>
-                                            <select class="form-control form-control-md" name="ACCOUNT_TYPE_ID"
-                                                id="ACCOUNT_TYPE_ID">
-                                                <option value="">เลือกประเภท</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                            </select>
+                                                <select class="form-control" id="ACCOUNT_TYPE_ID" name="ACCOUNT_TYPE_ID">
+                                    <option>-- เลือกประเภทบัญชี --</option>
+                                    <?php
+
+                                        $sql_type = "SELECT * FROM account_bank_type";
+                                        $res_type = mysqli_query($conn, $sql_type);
+                                        while ($row_type = mysqli_fetch_assoc($res_type)) {
+                                            echo '<option value="'.$row_type['ACCOUNT_TYPE_ID'].'">'.$row_type['ACCOUNT_TYPE_NAME'].'</option>';                
+                                        }
+
+                                    ?>  
+                                </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -913,9 +925,9 @@ div.single-input  {
                                 <br><br><br><br><br><br><br><br>
                             </div>
                             <div class="modal-footer">
+                                <button type="button" id="prev-3" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ย้อนกลับ</font></button>
                                 <button type="button" id="next-3" style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px;
                                 padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ถัดไป</font></button>
-                                <button type="button" id="prev-3" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ย้อนกลับ</font></button>
                             </div>
                         </div>
                         <div id="fourth">
@@ -985,8 +997,8 @@ div.single-input  {
                             </div>
                             <br><br> <br><br>
                             <div class="modal-footer">
-                                <button type="submit" name="submit" id="submit"  style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">สมัครสมาชิก</font></button>
                                 <button type="button" id="prev-4" style="background: #C0C0C0; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ย้อนกลับ</font></button>
+                                <button type="submit" name="submit" id="submit"  style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">สมัครสมาชิก</font></button>
                                 <input type="hidden" name="do" value="registion">
                             </div>
                         </div>

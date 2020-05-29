@@ -5,6 +5,7 @@ require_once __DIR__.'/require/config_pdo.php';
 require_once __DIR__.'/require/config.php';
 
 $MEMBER_ID = $_SESSION['MEMBER_ID'];
+$token = "40b993475cc3a8223b20a7cb602cccc9";
 
 $sql = "SELECT * FROM member WHERE MEMBER_ID = :MEMBER_ID";
 $stmt=$db->prepare($sql);
@@ -23,6 +24,29 @@ $stmt->execute();
 $row3=$stmt->fetch(PDO::FETCH_ASSOC);
 $PROJECT_PAYMENT = $row3['PROJECT_BUY_ID'];
 $PROJECT_JOIN = $row3['PROJECT_ID'];
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"214000\",\n \"note\" : \"\"\n}",
+  CURLOPT_HTTPHEADER => array(
+    "Content-Type: application/json",
+    "Cookie: XSRF-TOKEN=eyJpdiI6IjZWMlwvTEtpeEVqc2p6Ymp1M2VuTW53PT0iLCJ2YWx1ZSI6IkZZV2lhT2ZJRGVxOWlTeU5MWkVidTlcL1F2bmorQlJnOW9nVTJ1M05DaG81cXlJcmd4ZmxWVzNCejhtYXBmS2ZFIiwibWFjIjoiMTk5ODc2OTQ5MDJhYTJiMDUwNTZkZGNmOWViNjEzNjFjNDZlOGU4NjM3YTc3YTFmMTIyMzQ4ZTcyMzkwYWY3ZSJ9; t10service_session=eyJpdiI6InhZZ1k0Y1M5aXF5aHlYTnlSbkp1Ync9PSIsInZhbHVlIjoiek5GRkhPKzRHbllxOVMxbkY1MG1BV1wvMlJ2VVhPVzF4Mk8yQnVrN1pROEd2UCtRRm9RVk5QdkVaNVNlWjE0MDIiLCJtYWMiOiJlY2E0Mjk1Mzc3NTk2NDNhZmM1ZTIzNjM5MTUwMjNkNzU3YWU2Y2RiNzNmNGY2OWQ4Yjc1MjU1NGEyM2NjY2U0In0%3D"
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
 
 ?>
 
@@ -233,9 +257,7 @@ a.linkhover:hover {
                             </div>
                             <div id="Mumbai" class="tabcontent">
                                 <h3>Mumbai</h3>
-                                <p>Mumbai is the capital of Maharashtra, India.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.</p>
+                                <?=$response?>
                             </div>
                         </div>
                         <div class="form-group col-md-5">
@@ -335,21 +357,26 @@ a.linkhover:hover {
                                                 </font>
                                             </h3>
                                             <h4 align='right'>
-                                                <font style="color: #000; font-weight: 950;"><?=$SUM_TOTAL?> TCoin
+                                                <font style="color: #000; font-weight: 950;"> TCoin
                                                 </font>
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6" align='center'>
-                                            <button type="submit" name="submit" id="submit"
-                                                style="background: #696969; border-radius: 100px; padding: 5px 30px;">
-                                                <font
-                                                    style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">
-                                                    ยืนยันการชำระเงิน</font>
-                                            </button>
+                                    <form action="https://dev.t10assets.com/api/v1/ecommerce/payment/qrcode" method="POST" id="payment_form1"> 
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6" align='center'>
+                                                <input type="hidden" name="token" value="<?=$token?>">
+                                                <input type="hidden" name="amount" value="<?=$SUM_1?>">
+                                                <input type="hidden" name="note" value="ICO">
+                                                <button type="submit" name="submit" id="submit"
+                                                    style="background: #696969; border-radius: 100px; padding: 5px 30px;">
+                                                    <font
+                                                        style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">
+                                                        ยืนยันการชำระเงิน</font>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>    
                                 </div>
                                 <div id="menu1" class="tab-pane fade">
                                     <h3 align='left'>
@@ -636,6 +663,7 @@ $(document).ready(function(e) {
     }));
 });
 </script>
+
 <script>
 function readURL(input) {
     if (input.files && input.files[0]) {

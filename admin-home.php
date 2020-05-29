@@ -2,10 +2,20 @@
 <html class="no-js" lang="en">
 
 <head>
-    <?php 
+<?php 
+
 require_once __DIR__ . '/require/admin/head.php'; 
 require_once __DIR__.'/require/config.php';
 require_once __DIR__.'/require/config_pdo.php';
+
+$MEMBER_CARD = $_POST['MEMBER_CARD_NUMBER'];
+$sql_photo = "SELECT MEMBER_PHOTO FROM member WHERE MEMBER_CARD_NUMBER = :MEMBER_CARD";
+$stmt=$db->prepare($sql_photo);
+$stmt->bindparam(':MEMBER_CARD_NUMBER', $MEMBER_CARD);
+$stmt->execute();
+$row_photo=$stmt->fetch(PDO::FETCH_ASSOC);
+$MEMBER_PHOTO = $row_photo['MEMBER_PHOTO'];
+
 
 $sql1 = "SELECT COUNT(MEMBER_ID) as COUNT FROM member";
 $stmt=$db->prepare($sql1);
@@ -116,6 +126,7 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                                                $MEMBER_SERNAME = $row['MEMBER_SERNAME'];
                                                $MEMBER_KYC = $row['MEMBER_KYC'];
                                                $DONATE = $row['DONATE'];
+                                               $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
                                             ?>
                                                     <tr>
                                                         <td><?=$MEMBER_CARD_NUMBER?></td>
@@ -135,13 +146,7 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                                                         <td><?=$DONATE?></td>
                                                         <td>
                                                             <div class="table-actions">
-                                                                <button type="button" id="link_modal"
-                                                                    data-toggle="modal" data-target="#EditModal"
-                                                                    data-id="<?=$MEMBER_CARD_NUMBER;?>"
-                                                                    class="btn btn-success btn-sm editbtn"><i
-                                                                        class="fas fa-pencil-alt"></i></button>
-                                                                <a href="#"><i class="ik ik-eye"></i></a>
-                                                                <a href="#"><i class="ik ik-edit-2"></i></a>
+                                                                <a href="#" id="link_modal" data-toggle="modal" data-target="#EditModal" data-id="<?=$MEMBER_CARD_NUMBER;?>"><i class="ik ik-eye"></i></a>
                                                                 <a href="#"><i class="ik ik-trash-2"></i></a>
                                                             </div>
                                                         </td>
@@ -397,8 +402,6 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <!-- <img src="pic/bg_2.png" class="rounded float-left img-fluid" alt="..."
-                                style="width: 500px; height: 685px;"> -->
                             <form action="register_query.php" method="POST" id="EditModal"
                                 enctype="multipart/form-data">
                                 <div class="form-row">
@@ -409,6 +412,9 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                                                     ข้อมูลสมาชิก</font>
                                             </b></label>
                                         <hr style="border-color: #006665;">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <img src="/file_ico/profile_kyc/<?php echo $row['MEMBER_PHOTO']; ?>" name="MEMBER_PHOTO" id="MEMBER_PHOTO" class="rounded float-right img-fluid" alt="...">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -469,15 +475,15 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="form-row">
                                     <div class="form-group col-md-2">
                                         <label for="inputEmail4">จังหวัด</label>
-                                        <input type="text" class="form-control" id="PROVINCE_ID" name="PROVINCE_ID">
+                                        <input type="text" class="form-control" id="PROVINCE_ID" name="name_pro">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="inputEmail4">เขต/อำเภอ</label>
-                                        <input type="text" class="form-control" id="AMPHURE_ID" name="AMPHURE_ID">
+                                        <input type="text" class="form-control" id="AMPHURE_ID" name="name_am">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="inputEmail4">แขวง/ตำบล</label>
-                                        <input type="text" class="form-control" id="DISTRINCT_ID" name="DISTRINCT_ID">
+                                        <input type="text" class="form-control" id="DISTRINCT_ID" name="name_th">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -549,9 +555,9 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                     console.log(response)
                     var arr_input_key = ['MEMBER_MAIL', 'MEMBER_BIRTH', 'MEMBER_TEL',
                         'MEMBER_GENDER', 'MEMBER_HOUSE', 'MEMBER_VILLAGE','MEMBER_ALLEY',
-                        'PROVINCE_ID', 'AMPHURE_ID', 'DISTRINCT_ID', 'POSTCODE_ID',
+                        'name_pro', 'name_am', 'name_th', 'POSTCODE_ID',
                         'BANK_ID','BANK_BRANCH', 'ACCOUNT_TYPE_NAME', 'ACCOUNT_BANK_NUMBER',
-                        'ACCOUNT_BANK_NAME'
+                        'ACCOUNT_BANK_NAME', 'MEMBER_PHOTO'
                     ]
                     var arr_old_key = ['ACCOUNT_TYPE_ID']
                     $.each(response, function(indexInArray, valueOfElement) {
@@ -559,6 +565,11 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                             if (valueOfElement != '') {
                                 modal.find('input[name="' + indexInArray + '"]')
                                     .val(valueOfElement)
+                            }
+                        }
+                        if (jQuery.inArray(indexInArray, arr_input_key) !== -1) {
+                            if (valueOfElement != '') {
+                                modal.attr('img[src="file_ico/profile_kyc/' + indexInArray + '"]')
                             }
                         }
                         if (jQuery.inArray(indexInArray, arr_old_key) !== -1){
