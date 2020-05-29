@@ -1,3 +1,5 @@
+
+
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>ADMIN :: ICO Kalungka</title>
@@ -14,5 +16,6 @@
         <link rel="stylesheet" href="plugins/ionicons/dist/css/ionicons.min.css">
         <link rel="stylesheet" href="plugins/icon-kit/dist/css/iconkit.min.css">
         <link rel="stylesheet" href="plugins/perfect-scrollbar/css/perfect-scrollbar.css">
-		<link rel="stylesheet" href="css/theme.min.css">
+		<!-- <link rel="stylesheet" href="css/theme.min.css"> -->
         <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="css/theme3.min.css">

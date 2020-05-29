@@ -16,6 +16,6 @@
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/slicknav.css">
-
+	<link rel="stylesheet" href="css/theme.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>

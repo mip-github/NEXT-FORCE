@@ -14,11 +14,11 @@ $PROJECT_END = $_POST['PROJECT_END'];
 $PROJECT_DETAIL = $_POST['PROJECT_DETAIL'];  
 
 
-$path="project/";  
+$path="file_ico/project/";  
 $type = strrchr($_FILES['PROJECT_FILES']['name'],".");
 $newname = $date.$rr.$MEMBER_NAME.$rr.$MEMBER_SURNAME.$type;
 $path_copy=$path.$newname;
-$path_link="project/".$newname;
+$path_link="file_ico/project/".$newname;
 move_uploaded_file($_FILES['PROJECT_FILES']['tmp_name'],$path_copy);  
 
 if(isset($_POST["do"]) && $_POST["do"] != "" ){

@@ -40,7 +40,7 @@
                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><label class ="font06"><?php echo $_SESSION['MEMBER_NAME']; ?> <?php echo $_SESSION['MEMBER_SERNAME']; ?></label> </a>&emsp;
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <a class="dropdown-item" href="index.php">Home</a>
-                                                <a class="dropdown-item" href="profile.php">Profile</a>
+                                                <a class="dropdown-item" href="UserBuy.php">Profile</a>
                                                 <a class="dropdown-item" href="logout.php">Log out</a>
                                             </div> 
                                             <img src="pic/user3.jpg" class="rounded-circle" width="50" />

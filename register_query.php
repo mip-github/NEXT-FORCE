@@ -52,11 +52,11 @@ $user_activation_code = md5(rand());
 
 $rr = " ";
 
-$path="profile_kyc/";  
+$path="file_ico/profile_kyc/";  
 $type = strrchr($_FILES['MEMBER_PHOTO']['name'],".");
 $newname = $date.$rr.$MEMBER_NAME.$rr.$MEMBER_SURNAME.$type;
 $path_copy=$path.$newname;
-$path_link="profile_kyc/".$newname;
+$path_link="file_ico/profile_kyc/".$newname;
 move_uploaded_file($_FILES['MEMBER_PHOTO']['tmp_name'],$path_copy);  
 
 if(isset($_POST["do"]) && $_POST["do"] != "" ){
@@ -71,10 +71,10 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
             echo "Error";
         }else{    
 
-        $sql_insert = "INSERT INTO member(MEMBER_CARD_NUMBER, MEMBER_NAME, MEMBER_SERNAME, MEMBER_GENDER, MEMBER_BIRTH, MEMBER_TEL, MEMBER_HOUSE, MEMBER_VILLAGE, MEMBER_ALLEY, PROVINCE_ID, AMPHURE_ID, DISTRINCT_ID, POSTCODE_ID, MEMBER_PHOTO, MEMBER_MAIL, MEMBER_PASSWORD, MEMBER_STATUS, MEMBER_SUBSCRIPTION, MEMBER_ACTIVATE_CODE)
+        $sql_insert = "INSERT INTO member(MEMBER_CARD_NUMBER, MEMBER_NAME, MEMBER_SERNAME, MEMBER_GENDER, MEMBER_BIRTH, MEMBER_TEL, MEMBER_HOUSE, MEMBER_VILLAGE, MEMBER_ALLEY, PROVINCE_ID, AMPHURE_ID, DISTRINCT_ID, POSTCODE_ID, MEMBER_PHOTO, MEMBER_MAIL, MEMBER_PASSWORD, MEMBER_STATUS, MEMBER_SUBSCRIPTION, MEMBER_ACTIVATE_CODE, MEMBER_KYC, DONATE)
                        VALUES ('".$_POST['MEMBER_ID']."','".$_POST['MEMBER_NAME']."', '".$_POST['MEMBER_SURNAME']."', '".$_POST['MEMBER_GENDER']."', '".$_POST['MEMBER_BIRTH']."', '".$_POST['MEMBER_TEL']."', 
                                    '".$_POST['MEMBER_HOUSE']."', '".$_POST['MEMBER_VILLAGE']."', '".$_POST['MEMBER_ALLEY']."', '".$_POST['province_id']."', '".$_POST['amphure_id']."', 
-                                   '".$_POST['district_id']."' , '".$_POST['MEMBER_POSTCODE']."', '$newname', '".$_POST['MEMBER_EMAIL']."', '".$password_hash."', 'not verified', current_timestamp(), '".$user_activation_code."')"; 
+                                   '".$_POST['district_id']."' , '".$_POST['MEMBER_POSTCODE']."', '$newname', '".$_POST['MEMBER_EMAIL']."', '".$password_hash."', 'not verified', current_timestamp(), '".$user_activation_code."', 0, NULL)"; 
         // echo($sql_insert);
         // die();
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());

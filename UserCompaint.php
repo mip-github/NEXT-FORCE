@@ -19,47 +19,7 @@
 <body bgcolor = ''>
     <header>
         <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid ">
-                    <div class="header_bottom_border">
-                        <div class="row align-items-center">
-                            <div class="col-xl-3 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.php">
-                                        <img src="pic/logo.png" alt="" style="width: 150px; height: 70px;">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-7">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="#">About us</a></li>
-                                            <li><a href="#">Project</a></li>
-                                            <li><a href="#">Investment</a></li>
-                                            <li><a href="#">Team</a></li>
-                                            <li><a href="#">Roadmap</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            <?php if (isset($_SESSION['MEMBER_ID'])) { ?>
-                                   
-                                   <label class ="font07">|</label>&emsp;
-                                   <img src ="pic/AW_Icon_V1-15.png" style="height: 20px">&emsp;
-                                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><label class ="font06"><?php echo $_SESSION['MEMBER_NAME']; ?> <?php echo $_SESSION['MEMBER_SERNAME']; ?></label> </a>&emsp;
-                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                       <a class="dropdown-item" href="index.php">Home</a>
-                                       <a class="dropdown-item" href="profile.php">Profile</a>
-                                       <a class="dropdown-item" href="logout.php">Log out</a>
-                                   </div> 
-                                   <img src="pic/user3.jpg" class="rounded-circle" width="50" />
-                                      
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php require_once __DIR__.'/require/header_profile.php'; ?>
 		    <!-- header-end -->
 			<!--เนื้อหา-->
 			<div class="team" align = 'center'>
@@ -70,15 +30,15 @@
                             <hr class="my-4" style="border-color: #006665;">
                         </div>
                     </div> 
-                    <form action="SaveUserProfile.php" method="POST" encypte="multipart/form-data" id="compaint_form">   
+                    <form action="SaveUserProfile.php" method="POST" enctype="multipart/form-data" id="compaint_form">   
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="font09">หัวข้อที่ร้องเรียน<font style="color: red;">*</font></div><br>
-                                    <div class="input-group input-group-lg">
+                                    <div class="input-group">
                                         <select class="form-control form-control-lg" name="COM_TOPIC" id="COM_TOPIC">
                                             <option value="">เลือกประเภท</option>
-                                            <option value="">1</option>
-                                            <option value="">2</option>
+                                            <option>1</option>
+                                            <option>2</option>
                                         </select>
                                     </div><br>
                                 <div class="font09">ข้อความส่งถึงเจ้าหน้าที่<font style="color: red;">*</font></div><br>
@@ -87,13 +47,13 @@
                                     </div><br> 
                                 <div class="font09">วัน/เดือน/ปี ที่เกิดปัญหา<font style="color: red;">*</font></div><br>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="COM_DATE" id="COM_DATE">
+                                        <input type="date" class="form-control form-control-lg" name="COM_DATE" id="COM_DATE">
                                     </div>        
                             </div>
-                            <div class="col-lg-6">
+                            <div class="form-group col-md-6">
                                 <div class="font09">แนบหลักฐาน (กรุณาอัพโหลดไฟล์รูปภาพที่มีสกุลดังนี้ (.jpg , .pdf))<font style="color: red;">*</font></div><br>
                                     <div class="input-group">
-                                        <input type="file" class="form-control" name="COM_FILES" id="COM_FILES" data-validation-max-size="25mb" data-validation="mime size" data-validation-allowing="jpg, pdf" onchange="readURL(this);">
+                                        <input type="file" class="form-control form-control-lg" name="COM_FILES" id="COM_FILES" data-validation-max-size="25mb" data-validation="mime size" data-validation-allowing="jpg, pdf" onchange="readURL(this);">
                                 </div><br>
                             <img id="picture" src="#"><br><BR>
                             <button type="submit" name="submit" id="submit"  style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ส่งเรื่องร้องเรียน</font></button>
@@ -104,21 +64,18 @@
 					</hr>
 				</div>
 			</div>
-        
-
 
 <aside id="sticky-social">
     <ul>
-        <li><a href="#" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-08.png'></img><span>&nbsp;การซื้อของฉัน</span></a></li>
+        <li><a href="UserBuy.php" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-08.png'></img><span>&nbsp;การซื้อของฉัน</span></a></li>
         <li><a href="UserProfile.php" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-02.png'><span>&nbsp;ข้อมูลส่วนตัว</span></a></li>
-        <li><a href="#" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-03.png'><span>&nbsp;การยืนยันตัวตน</span></a></li>
-        <li><a href="#" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-04.png'><span>&nbsp;บัญชีธนาคาร</span></a></li>
+        <li><a href="UserVerify.php" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-03.png'><span>&nbsp;การยืนยันตัวตน</span></a></li>
+        <li><a href="UserBanking.php" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-04.png'><span>&nbsp;บัญชีธนาคาร</span></a></li>
         <li><a href="UserCompaint.php" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-05.png'><span> &nbsp;แจ้งเรื่องร้องเรียน</span></a></li>
         <li><a href="#" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-06.png'><span>&nbsp;ประวัติรายงาน</span></a></li>
         <li><a href="#" class="entypo-slide"><img height='30' src ='pic/AW_Icon_V1-07.png'><span>&nbsp;ตั้งค่าภาษา</span></a></li>
     </ul>
 </aside>
-
 
     
 <!--End slide-->
@@ -158,7 +115,7 @@
                 });
             }
                 if(response=="Success"){
-                    swal("", {
+                    swal("บันทึกข้อมูลเสร็จสิ้น", {
                     icon: "success",
                     });
                 }
@@ -167,5 +124,21 @@
             });
         }));
     });
+</script>
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#picture')
+                .attr('src', e.target.result)
+                .width(150)
+                .height(100);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 </html>
