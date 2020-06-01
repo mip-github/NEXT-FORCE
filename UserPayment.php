@@ -36,16 +36,16 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"214000\",\n \"note\" : \"\"\n}",
+  CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"2\",\n \"note\" : \"\"\n}",
   CURLOPT_HTTPHEADER => array(
-    "Content-Type: application/json",
-    "Cookie: XSRF-TOKEN=eyJpdiI6IjZWMlwvTEtpeEVqc2p6Ymp1M2VuTW53PT0iLCJ2YWx1ZSI6IkZZV2lhT2ZJRGVxOWlTeU5MWkVidTlcL1F2bmorQlJnOW9nVTJ1M05DaG81cXlJcmd4ZmxWVzNCejhtYXBmS2ZFIiwibWFjIjoiMTk5ODc2OTQ5MDJhYTJiMDUwNTZkZGNmOWViNjEzNjFjNDZlOGU4NjM3YTc3YTFmMTIyMzQ4ZTcyMzkwYWY3ZSJ9; t10service_session=eyJpdiI6InhZZ1k0Y1M5aXF5aHlYTnlSbkp1Ync9PSIsInZhbHVlIjoiek5GRkhPKzRHbllxOVMxbkY1MG1BV1wvMlJ2VVhPVzF4Mk8yQnVrN1pROEd2UCtRRm9RVk5QdkVaNVNlWjE0MDIiLCJtYWMiOiJlY2E0Mjk1Mzc3NTk2NDNhZmM1ZTIzNjM5MTUwMjNkNzU3YWU2Y2RiNzNmNGY2OWQ4Yjc1MjU1NGEyM2NjY2U0In0%3D"
+    "Content-Type: application/json"
   ),
 ));
 
 $response = curl_exec($curl);
-
 curl_close($curl);
+$rpe = json_decode($response);
+$qrcode = $rpe->rawQrCode; 
 
 
 ?>
@@ -160,9 +160,9 @@ a.linkhover:hover {
                     <div class="form-row">
                         <div class="form-group col-md-7">
                             <div class="tab">
-                                <button class="tablinks" onclick="openCity(event, 'Lucknow')">โอนเงินผ่านธนาคาร
-                                    <br>(Mobile-banking)</button>
+                                <button class="tablinks" onclick="openCity(event, 'Lucknow')">โอนเงินผ่านธนาคาร<br>(Mobile-banking)</button>
                                 <button class="tablinks" onclick="openCity(event, 'Mumbai')">วอลเลท (Wallet)</button>
+                                <button class="tablinks" onclick="openCity(event, 'Mumbai1')">QR-Code</button>
                             </div>
                             <div id="Lucknow" class="tabcontent">
                                 <h3 align='left'>เลือกวิธีชำระเงิน</h3>
@@ -257,7 +257,10 @@ a.linkhover:hover {
                             </div>
                             <div id="Mumbai" class="tabcontent">
                                 <h3>Mumbai</h3>
-                                <?=$response?>
+                            </div>
+                            <div id="Mumbai1" class="tabcontent">
+                                <h3>Payment QR-Code</h3>
+                                <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=<?php echo($qrcode);?>" />
                             </div>
                         </div>
                         <div class="form-group col-md-5">
@@ -284,6 +287,7 @@ a.linkhover:hover {
                                 $stmt->bindparam(':PROJECT_JOIN', $PROJECT_JOIN);
                                 $stmt->execute();
                                 $row2=$stmt->fetch(PDO::FETCH_ASSOC);
+                                    $PROJECT_DLT = $row2['PROJECT_ID'];
                                     $PROJECT_NAME = $row2['PROJECT_NAME'];
                                     $PROJECT_NUM_UNIT = $row2['PROJECT_NUM_UNIT'];
                                     $PROJECT_THB = number_format($PROJECT_NUM_UNIT);     
@@ -293,11 +297,14 @@ a.linkhover:hover {
                                 $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
                                 $stmt->execute();
                                 while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                    $PROJECT_BUY_ID = $row_project['PROJECT_BUY_ID'];
                                     $PROJECT_ID = $row_project['PROJECT_ID'];
                                     $SUM_VAT = $SUM * 7 / 100;
                                     $PROJECT_SUM = number_format($SUM_VAT); 
                                     $SUM_1 = $SUM + $SUM_VAT;
-                                    $SUM_TOTAL = number_format($SUM_1); 
+                                    $SUM_TOTAL = number_format($SUM_1);
+                                    
+                                    $SUM_2 = '1';
 
         
                                     
@@ -306,11 +313,14 @@ a.linkhover:hover {
 
                                     <div class="alert alert-info" role="alert">
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group col-md-6">
                                                 <h4 align='left'>
                                                     <font style="color: #000; font-weight: 950;"><?=$PROJECT_NAME?>
                                                     </font>
                                                 </h4>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <a href="DeleteProject.php?id=<?=$PROJECT_BUY_ID?>" onclick="return confirm('คุณต้องการลบรายการนี้ ใช่หรือไม่ ?')"><img src="pic/Icon_ICO-45.png" alt="" style="height: 18px;" align="right"></a>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -357,16 +367,16 @@ a.linkhover:hover {
                                                 </font>
                                             </h3>
                                             <h4 align='right'>
-                                                <font style="color: #000; font-weight: 950;"> TCoin
+                                                <font style="color: #000; font-weight: 950;"><?=$SUM_TOTAL?> TCoin
                                                 </font>
                                             </h4>
                                         </div>
                                     </div>
-                                    <form action="https://dev.t10assets.com/api/v1/ecommerce/payment/qrcode" method="POST" id="payment_form1"> 
+                                    <form action="https://www.t10assets.com/api/v1/ecommerce/payment/qrcode" method="POST" id="payment_form1"> 
                                         <div class="form-row">
                                             <div class="form-group col-md-6" align='center'>
                                                 <input type="hidden" name="token" value="<?=$token?>">
-                                                <input type="hidden" name="amount" value="<?=$SUM_1?>">
+                                                <input type="hidden" name="amount" value="<?=$SUM_2?>">
                                                 <input type="hidden" name="note" value="ICO">
                                                 <button type="submit" name="submit" id="submit"
                                                     style="background: #696969; border-radius: 100px; padding: 5px 30px;">
@@ -634,6 +644,38 @@ $("#payment_form").submit(function(event) {
     event.preventDefault();
 });
 </script> -->
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#payment_form1").on('submit', (function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                console.log(response)
+                if (response == "Error") {
+                    swal("", {
+                        icon: "warning",
+                    });
+                }
+                if (response == "Success") {
+                    swal("บันทึกข้อมูลเสร็จสิ้น", {
+                        icon: "success",
+                    });
+                setTimeout(function(){
+                window.location.href = "UserPayment.php";
+                    },5000);    
+                }
+            },
+            error: function() {}
+        });
+    }));
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function(e) {
     $("#payment_form").on('submit', (function(e) {

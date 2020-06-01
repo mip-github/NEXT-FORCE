@@ -39,7 +39,11 @@ $sql3 = "SELECT COUNT(MEMBER_ID) as COUNT FROM member WHERE MEMBER_KYC = 2";
 $stmt=$db->prepare($sql3);
 $stmt->execute();
 $row3=$stmt->fetch(PDO::FETCH_ASSOC);
-    $COUNT3 = $row3['COUNT'];      
+    $COUNT3 = $row3['COUNT'];    
+    
+$rpe = json_decode($response);
+$MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;    
+    
 ?>
 </head>
 <style>
@@ -402,135 +406,151 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <form action="register_query.php" method="POST" id="EditModal"
-                                enctype="multipart/form-data">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4"><b>
-                                                <font
-                                                    style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
-                                                    ข้อมูลสมาชิก</font>
-                                            </b></label>
-                                        <hr style="border-color: #006665;">
+                            <form action="register_query.php" method="POST" id="EditModal" enctype="multipart/form-data">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputEmail4"><b>
+                                                            <font
+                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
+                                                                ข้อมูลสมาชิก</font>
+                                                        </b></label>
+                                                    <hr style="border-color: #006665;">
+                                                </div>                                    
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputEmail4">อีเมล</label>
+                                                    <input type="text" class="form-control" id="MEMBER_MAIL" name="MEMBER_MAIL">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputEmail4"><b>
+                                                            <font
+                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
+                                                                ข้อมูลส่วนตัว</font>
+                                                        </b></label>
+                                                    <hr style="border-color: #006665;">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">วัน/เดือน/ปีเกิด</label>
+                                                    <input type="text" class="form-control" id="MEMBER_BIRTH" name="MEMBER_BIRTH">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">เบอร์โทรศัพท์</label>
+                                                    <input type="text" class="form-control" id="MEMBER_TEL" name="MEMBER_TEL">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">เพศ</label>
+                                                    <input type="text" class="form-control" id="MEMBER_GENDER" name="MEMBER_GENDER">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputEmail4"><b>
+                                                            <font
+                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
+                                                                ข้อมูลที่อยู่</font>
+                                                        </b></label>
+                                                    <hr style="border-color: #006665;">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">บ้านเลขที่</label>
+                                                    <input type="text" class="form-control" id="MEMBER_HOUSE" name="MEMBER_HOUSE">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">หมู่บ้าน</label>
+                                                    <input type="text" class="form-control" id="MEMBER_VILLAGE"
+                                                        name="MEMBER_VILLAGE">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">ซอย</label>
+                                                    <input type="text" class="form-control" id="MEMBER_ALLEY" name="MEMBER_ALLEY">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">จังหวัด</label>
+                                                    <input type="text" class="form-control" id="PROVINCE_ID" name="name_pro">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">เขต/อำเภอ</label>
+                                                    <input type="text" class="form-control" id="AMPHURE_ID" name="name_am">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">แขวง/ตำบล</label>
+                                                    <input type="text" class="form-control" id="DISTRINCT_ID" name="name_th">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">รหัสไปรษณีย์</label>
+                                                    <input type="text" class="form-control" id="POSTCODE_ID" name="POSTCODE_ID">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputEmail4"><b>
+                                                            <font
+                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
+                                                                บัญชีธนาคาร</font>
+                                                        </b></label>
+                                                    <hr style="border-color: #006665;">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">ชื่อธนาคาร</label>
+                                                    <input type="text" class="form-control" id="BANK_ID" name="BANK_ID">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">สาขาที่เปิดใช้บัญชี</label>
+                                                    <input type="text" class="form-control" id="BANK_BRANCH" name="BANK_BRANCH">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">ประเภทบัญชี</label>
+                                                    <input type="text" class="form-control" id="ACCOUNT_TYPE_NAME"
+                                                        name="ACCOUNT_TYPE_NAME">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">หมายเลขบัญชี</label>
+                                                    <input type="text" class="form-control" id="ACCOUNT_BANK_NUMBER"
+                                                        name="ACCOUNT_BANK_NUMBER">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">ชื่อบัญชี</label>
+                                                    <input type="text" class="form-control" id="ACCOUNT_BANK_NAME"
+                                                        name="ACCOUNT_BANK_NAME">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-center">
+                                                <img src="pic/pe01.jpg" name="MEMBER_PHOTO" id="MEMBER_PHOTO" class="rounded mx-auto d-block" alt="..." style="width: 300px; height: 400px;" align='center'><br><br>
+                                                <button type="submit" name="submit" id="submit"  style="background: #3CB371; border-color: #3CB371; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ยืนยันตัวตนถูกต้อง</font></button><br>
+                                                <hr style="border-color: #BEBEBE;">
+                                                <label for="inputEmail4"><b>
+                                                            <font
+                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
+                                                                เหตุผล (ในกรณีเอกสารไม่สมบูรณ์)</font>
+                                                        </b></label>
+                                                <textarea class="form-control" id="exampleTextarea1" rows="10"></textarea><br><br>
+                                                <button type="submit" name="submit" id="submit"  style="background: #363636; border-color: #363636; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">รอเอกสาร/เอกสารไม่ถูกต้อง</font></button><br>
+                                            </div>                      
+                                        </div>  
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <img src="/file_ico/profile_kyc/<?php echo $row['MEMBER_PHOTO']; ?>" name="MEMBER_PHOTO" id="MEMBER_PHOTO" class="rounded float-right img-fluid" alt="...">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label for="inputEmail4">อีเมล</label>
-                                        <input type="text" class="form-control" id="MEMBER_MAIL" name="MEMBER_MAIL">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4"><b>
-                                                <font
-                                                    style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
-                                                    ข้อมูลส่วนตัว</font>
-                                            </b></label>
-                                        <hr style="border-color: #006665;">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">วัน/เดือน/ปีเกิด</label>
-                                        <input type="text" class="form-control" id="MEMBER_BIRTH" name="MEMBER_BIRTH">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="inputEmail4">เบอร์โทรศัพท์</label>
-                                        <input type="text" class="form-control" id="MEMBER_TEL" name="MEMBER_TEL">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label for="inputEmail4">เพศ</label>
-                                        <input type="text" class="form-control" id="MEMBER_GENDER" name="MEMBER_GENDER">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4"><b>
-                                                <font
-                                                    style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
-                                                    ข้อมูลที่อยู่</font>
-                                            </b></label>
-                                        <hr style="border-color: #006665;">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">บ้านเลขที่</label>
-                                        <input type="text" class="form-control" id="MEMBER_HOUSE" name="MEMBER_HOUSE">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">หมู่บ้าน</label>
-                                        <input type="text" class="form-control" id="MEMBER_VILLAGE"
-                                            name="MEMBER_VILLAGE">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">ซอย</label>
-                                        <input type="text" class="form-control" id="MEMBER_ALLEY" name="MEMBER_ALLEY">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">จังหวัด</label>
-                                        <input type="text" class="form-control" id="PROVINCE_ID" name="name_pro">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">เขต/อำเภอ</label>
-                                        <input type="text" class="form-control" id="AMPHURE_ID" name="name_am">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">แขวง/ตำบล</label>
-                                        <input type="text" class="form-control" id="DISTRINCT_ID" name="name_th">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">รหัสไปรษณีย์</label>
-                                        <input type="text" class="form-control" id="POSTCODE_ID" name="POSTCODE_ID">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputEmail4"><b>
-                                                <font
-                                                    style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
-                                                    บัญชีธนาคาร</font>
-                                            </b></label>
-                                        <hr style="border-color: #006665;">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">ชื่อธนาคาร</label>
-                                        <input type="text" class="form-control" id="BANK_ID" name="BANK_ID">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">สาขาที่เปิดใช้บัญชี</label>
-                                        <input type="text" class="form-control" id="BANK_BRANCH" name="BANK_BRANCH">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">ประเภทบัญชี</label>
-                                        <input type="text" class="form-control" id="ACCOUNT_TYPE_NAME"
-                                            name="ACCOUNT_TYPE_NAME">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">หมายเลขบัญชี</label>
-                                        <input type="text" class="form-control" id="ACCOUNT_BANK_NUMBER"
-                                            name="ACCOUNT_BANK_NUMBER">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputEmail4">ชื่อบัญชี</label>
-                                        <input type="text" class="form-control" id="ACCOUNT_BANK_NAME"
-                                            name="ACCOUNT_BANK_NAME">
-                                    </div>
-                                </div>
-                                <input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="<?=$MEMBER_CARD_NUMBER?>"/>
-                            </form>
+                                </div>    
+                            <input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="<?=$MEMBER_CARD_NUMBER?>"/>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -564,19 +584,17 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
                         if (jQuery.inArray(indexInArray, arr_input_key) !== -1) {
                             if (valueOfElement != '') {
                                 modal.find('input[name="' + indexInArray + '"]')
-                                    .val(valueOfElement)
-                            }
-                        }
-                        if (jQuery.inArray(indexInArray, arr_input_key) !== -1) {
-                            if (valueOfElement != '') {
-                                modal.attr('img[src="file_ico/profile_kyc/' + indexInArray + '"]')
+                                .val(valueOfElement)
                             }
                         }
                         if (jQuery.inArray(indexInArray, arr_old_key) !== -1){
-                    		if (valueOfElement != ''){
-                    			modal.find('input[name="'+indexInArray+'"]').attr('old-'+indexInArray, valueOfElement)
-                    		}
-                    	}
+                            if (valueOfElement != ''){
+                                modal.find('input[name="'+indexInArray+'"]').attr('old-'+indexInArray, valueOfElement)
+                            }
+                        }
+                        if (indexInArray === 'MEMBER_PHOTO') {
+                            modal.find('img').attr('src', 'file_ico/profile_kyc/'+valueOfElement)
+                        }
                     });
                     
                     modal.find('#MEMBER_CARD_NUMBER').val(MEMBER_CARD_NUMBER)
@@ -586,5 +604,4 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
     });
     </script>
 </body>
-
 </html>
