@@ -94,12 +94,12 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                     <li class="nav-item">
                                         <a class="nav-link" id="pills-setting-tab" data-toggle="pill"
                                             href="#previous-month" role="tab" aria-controls="pills-setting"
-                                            aria-selected="false">เอกสารไม่ครบ/ไม่สมบูรณ์(<?=$COUNT2?>)</a>
+                                            aria-selected="false">เอกสารไม่ครบ/ไม่สมบูรณ์(<?=$COUNT3?>)</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="pills-setting1-tab" data-toggle="pill"
                                             href="#previous1-month" role="tab" aria-controls="pills-setting1"
-                                            aria-selected="false">ตรวจสอบเรียบร้อย(<?=$COUNT3?>)</a>
+                                            aria-selected="false">ตรวจสอบเรียบร้อย(<?=$COUNT2?>)</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -111,7 +111,7 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                             <table id="data_table" class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>หมายเลขบัตรประชาชน/หนังสือเดินทางข</th>
+                                                        <th>หมายเลขบัตรประชาชน/หนังสือเดินทาง</th>
                                                         <th class="nosort">ชื่อสมาชิก</th>
                                                         <th>สถานะ(ยืนยันตัวตน)</th>
                                                         <th>จำนวนเงินลงทุน(MCOIN)</th>
@@ -133,16 +133,16 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                                $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
                                             ?>
                                                     <tr>
-                                                        <td><?=$MEMBER_CARD_NUMBER?></td>
-                                                        <td><?=$MEMBER_NAME?> <?=$MEMBER_SERNAME?></td>
+                                                        <td><h6><?=$MEMBER_CARD_NUMBER?></h6></td>
+                                                        <td><h6><?=$MEMBER_NAME?> <?=$MEMBER_SERNAME?></h6></td>
                                                         <td>
                                                             <?php 
                                                                 if($MEMBER_KYC == 0){
-                                                                    echo'<button type="button" class="btn btn-warning">รอตรวจสอบ</button>';
-                                                                }else if($MEMBER_KYC == 1){
-                                                                    echo'<button type="button" class="btn btn-danger">เอกสารไม่สมบุรณ์</button>';
+                                                                    echo'<button type="button" class="btn btn-warning"><i class="ik ik-help-circle"></i>รอตรวจสอบ</button>';
+                                                                }else if($MEMBER_KYC == 2){
+                                                                    echo'<button type="button" class="btn btn-danger"><i class="ik ik-info"></i>เอกสารไม่สมบุรณ์</button>';
                                                                 }else{
-                                                                    echo'<button type="button" class="btn btn-success">ตรวจสอบเรียบร้อบ</button>';
+                                                                    echo'<button type="button" class="btn btn-success"><i class="ik ik-check-circle"></i>ตรวจสอบเรียบร้อบ</button>';
                                                                 }
                                                             
                                                             ?>
@@ -194,11 +194,11 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                                         <td>
                                                             <?php 
                                                                 if($MEMBER_KYC == 0){
-                                                                    echo'<button type="button" class="btn btn-warning">รอตรวจสอบ</button>';
-                                                                }else if($MEMBER_KYC == 1){
-                                                                    echo'<button type="button" class="btn btn-danger">เอกสารไม่สมบุรณ์</button>';
+                                                                    echo'<button type="button" class="btn btn-warning"><i class="ik ik-help-circle"></i>รอตรวจสอบ</button>';
+                                                                }else if($MEMBER_KYC == 2){
+                                                                    echo'<button type="button" class="btn btn-danger"><i class="ik ik-info"></i>เอกสารไม่สมบุรณ์</button>';
                                                                 }else{
-                                                                    echo'<button type="button" class="btn btn-success">ตรวจสอบเรียบร้อบ</button>';
+                                                                    echo'<button type="button" class="btn btn-success"><i class="ik ik-check-circle"></i>ตรวจสอบเรียบร้อบ</button>';
                                                                 }
                                                             
                                                             ?>
@@ -206,8 +206,7 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                                         <td><?=$DONATE?></td>
                                                         <td>
                                                             <div class="table-actions">
-                                                                <a href="#"><i class="ik ik-eye"></i></a>
-                                                                <a href="#"><i class="ik ik-edit-2"></i></a>
+                                                                <a href="#" id="link_modal" data-toggle="modal" data-target="#EditModal" data-id="<?=$MEMBER_CARD_NUMBER;?>"><i class="ik ik-eye"></i></a>
                                                                 <a href="#"><i class="ik ik-trash-2"></i></a>
                                                             </div>
                                                         </td>
@@ -219,63 +218,6 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                     </div>
                                     <div class="tab-pane fade" id="previous-month" role="tabpanel"
                                         aria-labelledby="pills-setting-tab">
-                                        <div class="card-body">
-                                            <h5>ข้อมูลสมาชิกที่เอกสารไม่สมบูรณ์</h5>
-                                            <hr>
-                                            <table id="data_table" class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>หมายเลขบัตรประชาชน/หนังสือเดินทางข</th>
-                                                        <th class="nosort">ชื่อสมาชิก</th>
-                                                        <th>สถานะ(ยืนยันตัวตน)</th>
-                                                        <th>จำนวนเงินลงทุน(MCOIN)</th>
-                                                        <th><i class="ik ik-setting"></i></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php 
-                                            $sql = "SELECT * FROM member WHERE MEMBER_KYC = 1";
-                                            $stmt=$db->prepare($sql);
-                                            $stmt->execute();
-                                            while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-                                               $MEMBER_ID = $row['MEMBER_ID'];
-                                               $MEMBER_CARD_NUMBER = $row['MEMBER_CARD_NUMBER'];
-                                               $MEMBER_NAME = $row['MEMBER_NAME'];
-                                               $MEMBER_SERNAME = $row['MEMBER_SERNAME'];
-                                               $MEMBER_KYC = $row['MEMBER_KYC'];
-                                               $DONATE = $row['DONATE'];
-                                            ?>
-                                                    <tr>
-                                                        <td><?=$MEMBER_CARD_NUMBER?></td>
-                                                        <td><?=$MEMBER_NAME?> <?=$MEMBER_SERNAME?></td>
-                                                        <td>
-                                                            <?php 
-                                                                if($MEMBER_KYC == 0){
-                                                                    echo'<button type="button" class="btn btn-warning">รอตรวจสอบ</button>';
-                                                                }else if($MEMBER_KYC == 1){
-                                                                    echo'<button type="button" class="btn btn-danger">เอกสารไม่สมบุรณ์</button>';
-                                                                }else{
-                                                                    echo'<button type="button" class="btn btn-success">ตรวจสอบเรียบร้อบ</button>';
-                                                                }
-                                                            
-                                                            ?>
-                                                        </td>
-                                                        <td><?=$DONATE?></td>
-                                                        <td>
-                                                            <div class="table-actions">
-                                                                <a href="#"><i class="ik ik-eye"></i></a>
-                                                                <a href="#"><i class="ik ik-edit-2"></i></a>
-                                                                <a href="#"><i class="ik ik-trash-2"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="previous1-month" role="tabpanel"
-                                        aria-labelledby="pills-setting1-tab">
                                         <div class="card-body">
                                             <h5>ข้อมูลสมาชิกที่เอกสารไม่สมบูรณ์</h5>
                                             <hr>
@@ -308,11 +250,11 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                                         <td>
                                                             <?php 
                                                                 if($MEMBER_KYC == 0){
-                                                                    echo'<button type="button" class="btn btn-warning">รอตรวจสอบ</button>';
-                                                                }else if($MEMBER_KYC == 1){
-                                                                    echo'<button type="button" class="btn btn-danger">เอกสารไม่สมบุรณ์</button>';
+                                                                    echo'<button type="button" class="btn btn-warning"><i class="ik ik-help-circle"></i>รอตรวจสอบ</button>';
+                                                                }else if($MEMBER_KYC == 2){
+                                                                    echo'<button type="button" class="btn btn-danger"><i class="ik ik-info"></i>เอกสารไม่สมบุรณ์</button>';
                                                                 }else{
-                                                                    echo'<button type="button" class="btn btn-success">ตรวจสอบเรียบร้อบ</button>';
+                                                                    echo'<button type="button" class="btn btn-success"><i class="ik ik-check-circle"></i>ตรวจสอบเรียบร้อบ</button>';
                                                                 }
                                                             
                                                             ?>
@@ -320,13 +262,63 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                                         <td><?=$DONATE?></td>
                                                         <td>
                                                             <div class="table-actions">
-                                                                <button type="button" id="link_modal"
-                                                                    data-toggle="modal" data-target="#exampleModal"
-                                                                    data-id="<?=$TRANSACTION_ID;?>"
-                                                                    class="btn btn-success btn-sm editbtn"><i
-                                                                        class="fas fa-pencil-alt"></i></button>
-                                                                <a href="#"><i class="ik ik-eye"></i></a>
-                                                                <a href="#"><i class="ik ik-edit-2"></i></a>
+                                                                <a href="#" id="link_modal" data-toggle="modal" data-target="#EditModal" data-id="<?=$MEMBER_CARD_NUMBER;?>"><i class="ik ik-eye"></i></a>
+                                                                <a href="#"><i class="ik ik-trash-2"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="previous1-month" role="tabpanel"
+                                        aria-labelledby="pills-setting1-tab">
+                                        <div class="card-body">
+                                            <h5>ข้อมูลสมาชิกที่เอกสารไม่สมบูรณ์</h5>
+                                            <hr>
+                                            <table id="data_table" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>หมายเลขบัตรประชาชน/หนังสือเดินทางข</th>
+                                                        <th class="nosort">ชื่อสมาชิก</th>
+                                                        <th>สถานะ(ยืนยันตัวตน)</th>
+                                                        <th>จำนวนเงินลงทุน(MCOIN)</th>
+                                                        <th><i class="ik ik-setting"></i></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                            $sql = "SELECT * FROM member WHERE MEMBER_KYC = 1";
+                                            $stmt=$db->prepare($sql);
+                                            $stmt->execute();
+                                            while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                               $MEMBER_ID = $row['MEMBER_ID'];
+                                               $MEMBER_CARD_NUMBER = $row['MEMBER_CARD_NUMBER'];
+                                               $MEMBER_NAME = $row['MEMBER_NAME'];
+                                               $MEMBER_SERNAME = $row['MEMBER_SERNAME'];
+                                               $MEMBER_KYC = $row['MEMBER_KYC'];
+                                               $DONATE = $row['DONATE'];
+                                            ?>
+                                                    <tr>
+                                                        <td><?=$MEMBER_CARD_NUMBER?></td>
+                                                        <td><?=$MEMBER_NAME?> <?=$MEMBER_SERNAME?></td>
+                                                        <td>
+                                                            <?php 
+                                                                if($MEMBER_KYC == 0){
+                                                                    echo'<button type="button" class="btn btn-warning"><i class="ik ik-help-circle"></i>รอตรวจสอบ</button>';
+                                                                }else if($MEMBER_KYC == 2){
+                                                                    echo'<button type="button" class="btn btn-danger"><i class="ik ik-info"></i>เอกสารไม่สมบุรณ์</button>';
+                                                                }else{
+                                                                    echo'<button type="button" class="btn btn-success"><i class="ik ik-check-circle"></i>ตรวจสอบเรียบร้อบ</button>';
+                                                                }
+                                                            
+                                                            ?>
+                                                        </td>
+                                                        <td><?=$DONATE?></td>
+                                                        <td>
+                                                            <div class="table-actions">
+                                                                <a href="#" id="link_modal" data-toggle="modal" data-target="#EditModal" data-id="<?=$MEMBER_CARD_NUMBER;?>"><i class="ik ik-eye"></i></a>
                                                                 <a href="#"><i class="ik ik-trash-2"></i></a>
                                                             </div>
                                                         </td>
@@ -401,12 +393,11 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                 </div>
             </div>
 
-            <div class="modal fade exampleModal" id="EditModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <form action="register_query.php" method="POST" id="EditModal" enctype="multipart/form-data">
+                <div class="modal fade exampleModal" id="EditModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
@@ -536,15 +527,19 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                         <div class="col">
                                             <div class="text-center">
                                                 <img src="pic/pe01.jpg" name="MEMBER_PHOTO" id="MEMBER_PHOTO" class="rounded mx-auto d-block" alt="..." style="width: 300px; height: 400px;" align='center'><br><br>
-                                                <button type="submit" name="submit" id="submit"  style="background: #3CB371; border-color: #3CB371; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ยืนยันตัวตนถูกต้อง</font></button><br>
+                                                <form action="ApproveKyc.php" method="POST" id="approve_form">
+                                                    <button type="submit" name="submit" id="submit" onclick="return confirm('คุณต้องการอนุมัติรายการนี้ ใช่หรือไม่ ?')"  style="background: #3CB371; border-color: #3CB371; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ยืนยันตัวตนถูกต้อง</font></button><br>
+                                                    <input type="hidden" name="do" value="successverify">
+                                                    <input type="hidden" name="MEMBER_ID" id="MEMBER_ID">
+                                                </form>    
                                                 <hr style="border-color: #BEBEBE;">
-                                                <label for="inputEmail4"><b>
-                                                            <font
-                                                                style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">
-                                                                เหตุผล (ในกรณีเอกสารไม่สมบูรณ์)</font>
-                                                        </b></label>
-                                                <textarea class="form-control" id="exampleTextarea1" rows="10"></textarea><br><br>
-                                                <button type="submit" name="submit" id="submit"  style="background: #363636; border-color: #363636; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">รอเอกสาร/เอกสารไม่ถูกต้อง</font></button><br>
+                                                <label for="inputEmail4"><b><font style="color: #006665; font-size: 26px; font-family: 'DB Heavent', DB Heavent;">เหตุผล (ในกรณีเอกสารไม่สมบูรณ์)</font></b></label>
+                                                <form action="ApproveKyc.php" method="POST" id="notapprove_form">
+                                                    <textarea class="form-control" id="exampleTextarea1" name="REMARK" name="REMARK" rows="10"></textarea><br><br>
+                                                    <button type="submit" name="submit" id="submit" onclick="return confirm('คุณต้องการไม่อนุมัติรายการนี้ ใช่หรือไม่ ?')"  style="background: #363636; border-color: #363636; width: 660px; border-radius: 100px; padding: 5px 30px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">รอเอกสาร/เอกสารไม่ถูกต้อง</font></button><br>
+                                                    <input type="hidden" name="do" value="notverified">
+                                                    <input type="hidden" name="MEMBER_ID" id="MEMBER_ID">
+                                                </form>    
                                             </div>                      
                                         </div>  
                                     </div>
@@ -558,8 +553,8 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
         </div>
     </div>
 
-    <?php require_once __DIR__ . '/require/admin/script.php';?>
-    <script>
+<?php require_once __DIR__ . '/require/admin/script.php';?>
+<script>
     $(document).ready(function() {
         $('#EditModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -573,7 +568,7 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                 dataType: "json",
                 success: function(response) {
                     console.log(response)
-                    var arr_input_key = ['MEMBER_MAIL', 'MEMBER_BIRTH', 'MEMBER_TEL',
+                    var arr_input_key = ['MEMBER_ID', 'MEMBER_MAIL', 'MEMBER_BIRTH', 'MEMBER_TEL',
                         'MEMBER_GENDER', 'MEMBER_HOUSE', 'MEMBER_VILLAGE','MEMBER_ALLEY',
                         'name_pro', 'name_am', 'name_th', 'POSTCODE_ID',
                         'BANK_ID','BANK_BRANCH', 'ACCOUNT_TYPE_NAME', 'ACCOUNT_BANK_NUMBER',
@@ -602,6 +597,60 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
             });
         })
     });
-    </script>
+</script>
+<script type="text/javascript">
+    $(document).ready(function (e){
+        $("#approve_form").on('submit',(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "ApproveKyc.php",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(response) {
+                console.log(response)
+                if(response=="Success"){
+                    swal("Success", {
+                    icon: "success",
+                    });
+                setTimeout(function(){
+                location.reload();
+                    },5000);
+                }
+            },
+                error: function(){} 	        
+            });
+        }));
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function (e){
+        $("#notapprove_form").on('submit',(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "ApproveKyc.php",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(response) {
+                console.log(response)
+                if(response=="Success"){
+                    swal("Success", {
+                    icon: "success",
+                    });
+                setTimeout(function(){
+                location.reload();
+                    },5000);
+                }
+            },
+                error: function(){} 	        
+            });
+        }));
+    });
+</script>
 </body>
 </html>

@@ -83,35 +83,32 @@ a.linkhover:hover {
                                                     </tr>
                                                 </thead>
                                                 <tbody style="background-color: #E0FFFF;" align='left'>
-                                        
-                                                    <?php
+                                                <?php
+                                                $sql_project = "SELECT * FROM project";
+                                                $stmt=$db->prepare($sql_project);
+                                                $stmt->execute();
+                                                while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                                    $PROJECT_ID = $row_project['PROJECT_ID'];
+                                                    $PROJECT_NAME = $row_project['PROJECT_NAME'];
+                                                    $PROJECT_PRICE = $row_project['PROJECT_PRICE'];
+                                                    $PROJECT_NUM_UNIT = $row_project['PROJECT_NUM_UNIT'];
 
-                                                    $sql_project = "SELECT * FROM project";
-                                                    $stmt=$db->prepare($sql_project);
-                                                    $stmt->execute();
-                                                    while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
-                                                        $PROJECT_ID = $row_project['PROJECT_ID'];
-                                                        $PROJECT_NAME = $row_project['PROJECT_NAME'];
-                                                        $PROJECT_PRICE = $row_project['PROJECT_PRICE'];
-                                                        $PROJECT_NUM_UNIT = $row_project['PROJECT_NUM_UNIT'];
-
-                                                    ?>
-                                    
-                                                    <tr>
+                                                ?>
+                                                    <tr valign='middle'>
                                                         <td><?=$PROJECT_NAME?></td>
                                                         <td><?=$PROJECT_PRICE?></td>
                                                         <td><?=$PROJECT_NUM_UNIT?></td>
                                                         <td>
                                                             <form action="SaveUserProfile.php" method="POST" encypte="multipart/form-data" id="buy_form">
-                                                                <input type="submit" class="btn btn-success btn-sm" value="เลือก" name="submit">
+                                                                <button type="submit" style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px; padding: 0px 30px;" name="submit"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">เลือก</font></button>
                                                                 <input type="hidden" name="PROJECT_ID" value="<?=$PROJECT_ID?>">
                                                                 <input type="hidden" name="do" value="BuyProject">
                                                             </form>
-                                                        </td>
+                                                        </td> 
                                                     </tr>
+                                                <?php } ?>  
                                                 </tbody>
                                             </table>
-                                        <?php } ?>   
                                         </div>
                                     </div>
                                 </div>

@@ -7,7 +7,7 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
                                     <a href="index.php">
-                                        <img src="pic/logo.png" alt="" style="width: 150px; height: 70px;">
+                                    <img src="pic/nextforce1.png" alt="" style="width: 300px; height: 50px;">
                                     </a>
                                 </div>
                             </div>

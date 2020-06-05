@@ -49,7 +49,7 @@
 <footer class="footer">
         <!-- Slide Logo -->
         
-	<div class="team">
+	<!-- <div class="team">
 		<div id="section-logo-slide">
             <div class="container">
                 <div class="logo-slide supermartket-owl-carousel" data-number="4" data-margin="100" data-navcontrol="yes" align = 'center'>
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-	</div>
+	</div> -->
         <!-- End .logo-slide-->
         <div class="container">
             <hr class="supermartket-hr">
@@ -70,7 +70,7 @@
                     <div class="col-md-3 col-sm-6 has-logo">
                         <div class="footer-top-logo">
                             <h1 class="logo">
-                                <img src="pic/logo.png" style="height:42px" alt="logo">
+                                <img src="pic/nextforce1.png" style="height:35px; width:220px;" alt="logo">
                             </h1>
                         </div>
                         <div class="footer-infomation">

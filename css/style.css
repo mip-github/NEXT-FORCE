@@ -8622,6 +8622,14 @@ h6 {
     text-align: left;
 }
 
+.font15 {
+    font-size: 38px;
+    font-family: "Kanit", sans-serif;
+    color: #f5851f;
+    text-align: center;
+    font-weight: bold;
+}
+
 .btn7 {
     background: #f5851f;
     color: #FFFFFF;
@@ -8847,5 +8855,64 @@ ul {
 
 #sticky-social a[class*="slide"],
 #sticky-social a[class*="slide"]:hover,
+
+/*# sourceMappingURL=style.css.map */
+
+
+/* entypo */
+
+[class*="entypo1-"]:before {
+    font-family: "Kanit", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sticky {
+    left: 0;
+    position: fixed;
+    top: 150px;
+    width: 300px;
+}
+
+#sticky a {
+    background: #ffffff;
+    color: #006665;
+    display: block;
+    height: 70px;
+    font: 18px "Kanit", sans-serif;
+    line-height: 70px;
+    position: relative;
+    text-align: center;
+    width: 80px;
+    border-bottom-style: solid;
+    border-color: #f2f4f3;
+}
+
+#sticky a span {
+    line-height: 70px;
+    left: -400px;
+    position: absolute;
+    text-align: left;
+    width: 400px;
+    font-weight: bold;
+    background: #FFFFFF;
+}
+
+#sticky a:hover span {
+    left: 100%;
+    width: 300px;
+    background: #FFFFFF;
+}
+
+#sticky a[class*="slide"],
+#sticky a[class*="slide"]:hover,
 
 /*# sourceMappingURL=style.css.map */

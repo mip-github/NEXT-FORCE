@@ -3,7 +3,10 @@ session_start();
 include('require/config.php');
 include('require/config_pdo.php');
 
+$token = "40b993475cc3a8223b20a7cb602cccc9";
+
 $MEMBER_ID = $_SESSION['MEMBER_ID'];
+$PROJECT_REWARD = $_GET['id'];
 $sql = "SELECT * FROM provinces";
 $query = mysqli_query($conn, $sql);
 
@@ -14,12 +17,16 @@ $stmt->execute();
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
 $MEMBER_PHOTO = $row['MEMBER_PHOTO'];
 
-$sql2 = "SELECT * FROM project";
-$result2 = mysqli_query($conn, $sql2);
-$row1 = mysqli_fetch_object($result2);
+$sql2 = "SELECT * FROM project WHERE PROJECT_ID = :PROJECT_REWARD";
+$stmt2=$db->prepare($sql2);
+$stmt2->bindparam(':PROJECT_REWARD', $PROJECT_REWARD);
+$stmt2->execute();
+$row1=$stmt2->fetch(PDO::FETCH_ASSOC);
+$PROJECT_COUNTDOWN = $row1['PROJECT_END'];
 
-$sql3 = "SELECT * FROM project";
+$sql3 = "SELECT * FROM project WHERE PROJECT_ID = :PROJECT_REWARD";
 $stmt=$db->prepare($sql3);
+$stmt->bindparam(':PROJECT_REWARD', $PROJECT_REWARD);
 $stmt->execute();
 $row3=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -39,10 +46,9 @@ $PROJECT_REAL = $PROJECT_NUM_UNIT * 100 / $PROJECT_PRICE;
 <!doctype html>
 <html class="no-js" lang="zxx">
 <?php require_once __DIR__ . '/require/head.php';?>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link href="src/jquery.stepProgressBar.css" rel="stylesheet" type="text/css">
 <link href="css/validator.css" rel="stylesheet">
 <style>
@@ -72,13 +78,13 @@ a.linkhover:hover {
 </style>
 <style>
 .profile-userpic img {
-  float: none;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
 }
 </style>
 <style>
@@ -90,21 +96,58 @@ a.linkhover:hover {
 }
 </style>
 <style>
-h1.a{
-    color: #000000; 
-    font-size: 56px; 
+h1.a {
+    color: #000000;
+    font-size: 56px;
     font-family: 'DB Heavent', DB Heavent;
     font-weight: bold;
 }
+
 div.a {
-  line-height: normal;
-  color: #696969; 
+    line-height: normal;
+    color: #696969;
 }
-div.single-input  {
-  width: 60px;
-  margin: 0 auto;
-  display: block;
+
+div.single-input {
+    width: 60px;
+    margin: 0 auto;
+    display: block;
 }
+</style>
+<style>
+<style>
+.card {
+  position: relative;
+  width: 50%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #000;
+}
+
+.card:hover .overlay {
+  opacity: 0.7;
+}
+
+.btn7 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+</style>
 </style>
 
 <body>
@@ -118,341 +161,91 @@ div.single-input  {
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
                             <h1 class="font02">T10 Cryptocurrency is</h1>
-							<h2 class="font03">cryptocurrency community for business</h2></br>
-							<h4 class="font01">ระบบการเงินโดยเทคโนโลยี Blockchain ที่จะทำให้ทุกการใช้จ่ายในชีวิตประจำวันเป็นเรื่องง่ายผ่านแอปพลิเคชั่น T10 พร้อมทั้งสิทธิ์การสะสม Point ที่สามารถใช้งานควบคู่กับเงินสด และรองรับเฉพาะกลุ่มสมาชิก T10 เท่านั้น</h4><br><br>
+                            <h2 class="font03">cryptocurrency community for business</h2></br>
+                            <h4 class="font01">ระบบการเงินโดยเทคโนโลยี Blockchain
+                                ที่จะทำให้ทุกการใช้จ่ายในชีวิตประจำวันเป็นเรื่องง่ายผ่านแอปพลิเคชั่น T10
+                                พร้อมทั้งสิทธิ์การสะสม Point ที่สามารถใช้งานควบคู่กับเงินสด และรองรับเฉพาะกลุ่มสมาชิก
+                                T10 เท่านั้น</h4><br><br>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">
                                 <a href="#" class="boxed-btn5"><img src='pic/icon02.png'> White papers</a>&nbsp;&nbsp;
-								<a href="#" class="boxed-btn3"><img src='pic/icon01.png'> Presentation</img></a>
+                                <a href="#" class="boxed-btn3"><img src='pic/icon01.png'> Presentation</img></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="boxed-box01">
-                                <div class="font04">Kalungka CIO Finishes in:</div>
-                                    <div data-date="<?php echo $row1->PROJECT_END; ?>" id="count-down"></div>
+                            <div class="font04">Kalungka CIO Finishes in:</div>
+                            <div data-date="<?=$PROJECT_COUNTDOWN?>" id="count-down"></div>
 
                             <div>
                                 <button class="btn6" type="submit">Buy coin 15% off</button></br>
                                 <div id="myGoal" style="max-height: 80px;"></div><br>
                             </div>
-							
-							<div class="p2">Fixed token edition :</div>
-							<div class="p1">We Accepted </div>
-							
-							<div> 
-							<img width='60' height='30' src='pic/Icon_ICO-05.png'> 
-							<img width='60' height='30' src='pic/Icon_ICO-06.png'>
-							<img width='60' height='30' src='pic/Icon_ICO-07.png'>
-							<img width='60' height='30' src='pic/Icon_ICO-08.png'>
-							</div>
-							
+
+                            <div class="p2">Fixed token edition :</div>
+                            <div class="p1">We Accepted </div>
+
+                            <div>
+                                <img width='60' height='30' src='pic/Icon_ICO-05.png'>
+                                <img width='60' height='30' src='pic/Icon_ICO-06.png'>
+                                <img width='60' height='30' src='pic/Icon_ICO-07.png'>
+                                <img width='60' height='30' src='pic/Icon_ICO-08.png'>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div align = 'center'>
-		<div class="font05"><img width='10' height='10' src ='pic/icon03.png'></img> About us</div>
-		<h1 class="font02">Kalungka Project</h1></br>
-		<div class="font06">เป็นโครงการที่เกิดขึ้นจากแรงบันดาลใจของอาจารย์กวง ด้วยความมุ่งมั่นในการรวบรวมชาติพันธ์ต่างๆ ที่อาศัยอยู่ในโลกใบนี้</div>
-		<div class="font06">ได้มีโอกาสมาร่วมและสร้างสรรค์สังคมที่ดีงาม โดยใช้ชื่อ KALUNGKA กาลังกา ที่มีความหมายถึงความเป็นชาติพันธ์ </div>
-		<div class="font06">มีวัฒนธรรมอย่างใหม่เป็นชนเผ่าที่ เกิดขึ้นในศตวรรษที่ 21 และวัฒธรรมนี้จะถูกสร้างสรรค์เป็น Community</div>
-		<div class="font06">หรือวัฒนธรรมชุมชนในแบบที่เป็นของตัวเอง เป็นวิถีของกลุ่มที่ไม่เคยมีมาก่อนโดยรวบรวมวัฒนธรรม ไม่ว่างจะเป็นด้านดนตรี </div>
-		<div class="font06">การเต้นรำ ภาพยนตร์ เสื้อผ้าเครื่องแต่งกายและการกิน การทำอาหาร เป็นชุมชนที่มาให้ความสุข ความสนุกสนาน อย่างกาลังกา </div>
-		<div class="font06">ในลักษณะธรรมชาตินิยมผสมกลมกลืนกับความเป็นไปของเทคโนโลยี Blockchain</div>
-		<div class="font06">มีความทันสมัยแต่ไม่ทิ้งขนบธรรมเนียบประเพณี</div></br></br>
-	
-	<img width='1250 px' src ='pic/pic01.png'></img></br></br></br>
-	<div class="team">
-		<div class="font05"><img width='10' height='10' src ='pic/icon03.png'></img> Investment</div>
-		<h1 class="font02">Investment & Cost Estimation</h1></br>
-		<div class="font06">ความสามารถในการสร้างรายได้ที่หลากหลาายรูปแบบจาก Business Model ที่สามารถสร้าง Customer Segment,</div>
-		<div class="font06">Value Proposition, Channels และ Customer Relationship ที่เฉพาะตัว</div>
-		<div class="font06">รายได้หลักจะถูกแบ่งการลงทุนออกเป็นสัดส่วนการลงทุนในรูปแบบที่ต่างกัน โดนมีกลุ่มหลักดังนี้</div>
-		<div class="font06">ค่าใช้จ่ายในการปรับปรุงสถานที่ ค่าใช้จ่ายในการบริหารจัดการ ค่่าโฆษณาประชาสัมพันธ์ และเงินทุนสำรอง</div>
-        <img width='1250 px' src ='pic/pic02.png'></img></br></br></br>
-        <img width='1250 px' src ='pic/pic03.png'></img></br>
-    </div>
-    </br></br>
-	    <div class="font05"><img width='10' height='10' src ='pic/icon03.png'></img> Team</div>
-		<h1 class="font02">Awesome Team</h1></br>
+    <div class="font15"><i class="fa fa-award" align='left'></i></img> REWARD</div><br><br>
+    <div class="container-fluid">
+        <div class="row">
+        <?php
 
-    <div class="container">
-    	<div class="row text-center">
-    			
-    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe08.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>John Doe</h4>
-    				   	
-    				   	<p>Managing Director</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe05.jpg' width="100%">
-    				   	
-    				   	<div class="team-member"></br>
-    				   	<h4>Peter</h4>
-    				   	
-    				   	<p>Project Manager</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe10.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Klara</h4>
-    				   	
-    				   	<p>Syatem Analysis</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe06.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Anna</h4>
-    				   	
-    				   	<p>Syatem Analysis</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-                   
-    	</div>  <!-- row text-center -->
-    			</br></br>
-				<div class="row text-center">
-    			
-    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe01.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Danel</h4>
-    				   	
-    				   	<p>Web Developer</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe02.jpg' width="100%">
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Ethan</h4>
-    				   	
-    				   	<p>Programmer</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe03.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Camilla</h4>
-    				   	
-    				   	<p>Programmer</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe09.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Vinci</h4>
-    				   	
-    				   	<p>Programmer</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-                   
-    	</div>  <!-- row text-center -->
-		
-		    			</br></br>
-				<div class="row text-center">
-    			
-    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe11.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Eva</h4>
-    				   	
-    				   	<p>UX/UI</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe12.jpg' width="100%">
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Isabella</h4>
-    				   	
-    				   	<p>UX/UI</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		 </div> <!--col-lg-4 -->
-    				
-    		 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe07.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Gracie</h4>
-    				   	
-    				   	<p>Admin</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    				   
-    				   	<img class="img-rounded" alt="team-photo" src='pic/pe04.jpg' width="100%"> 
-    				   	
-    				   	<div class="team-member"></br>
-                        
-    				   	<h4>Jennifer</h4>
-    				   	
-    				   	<p>Admin</p>
-                        
-    				   	</div>
-    				   	
-    				   	<p class="social">
-    				   		<a href="#"><span class="fa fa-facebook-square"></span></a>
-    				   		<a href="#"><span class="fa fa-twitter-square"></span></a>
-    				   		<a href="#"><span class="fa fa-linkedin-square"></span></a>
-    				   		<a href="#"><span class="fa fa-google-plus-square"></span></a>
-    				   	</p>
-    						    					    				
-    		    </div> <!-- col-lg-4 -->
-                   
-    	</div>  <!-- row text-center -->
-    </div>
-</br></br>    
+        $sql4 = "SELECT * FROM project_reward WHERE PROJECT_ID = :PROJECT_REWARD";
+        $stmt4=$db->prepare($sql4);
+        $stmt4->bindparam(':PROJECT_REWARD', $PROJECT_REWARD);
+        $stmt4->execute();
+        while($row4=$stmt4->fetch(PDO::FETCH_ASSOC)){
+            $REWARD_ID = $row4['REWARD_ID'];
+            $PROJECT_ID = $row4['PROJECT_ID'];
+            $MINIMUM = $row4['MINIMUM'];
+            $NAME = $row4['NAME'];
+            $REWARD_SUM = $row4['REWARD_SUM'];
+            $REWARD_MAX = $row4['REWARD_MAX'];
+            $ESTIMATED = $row4['ESTIMATED'];
 
-    <div class="team">		
-            <div class="font05"><img width='10' height='10' src ='pic/icon03.png'></img> Roadmap</div>
-            <h1 class="font02">About Kalungka Roadmap</h1></br></br>
-            <img width='1250 px' src ='pic/pic04.png'></img>
-    </div>
-</div>
-
-<?php if (isset($_SESSION['MEMBER_ID'])) { ?>
-            <aside id="sticky">
-                <ul>
-                <?php
+        ?>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title"><h4><b><i class="fa fa-award"></i> REWARD FROM CAMPAIGN</b></h4>
+                        <p class="card-text"><h5>MINIMUM <b><font style="color: #000;"><?=$MINIMUM?> ฿</font></b></h5></p>
+                        <p class="card-text"><h5><b><font style="color: #696969;">FUND FOR ME</font></b></h5></p>
+                        <p class="card-text"><h5><?=$NAME?></h5></p>
+                        <p class="card-text"><h5><i class="fa fa-user"></i> <?=$REWARD_SUM?> Claim of <?=$REWARD_MAX?></h5></p>
+                        <p class="card-text"><h5><i class="fa fa-clock"></i> Estimated Delivery</h5></p>
+                        <p class="card-text"><h5><b><font style="color: #000;"><?=$ESTIMATED?> </font></b></h5></p>
+                        <?php 
+                        
+                        if($REWARD_SUM == $REWARD_MAX) {
+                            echo "";
+                        }else{
+                            echo "<div class='overlay'>
+                                     <button class='btn7' type='button' style='width: 100px; height: 50px;' data-toggle='modal' data-target='#PaymentReward' data-id='$REWARD_ID'>Pick</button>    
+                                  </div>";
+                        }                             
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        </div>
+    </div>    
+    <aside id="sticky">
+        <ul>
+            <?php
                 
                 $sql_select_project = "SELECT * FROM project";
                 $stmt=$db->prepare($sql_select_project);
@@ -462,13 +255,56 @@ div.single-input  {
                     $PROJECT_NAME = $row_select_project['PROJECT_NAME'];
     
                 ?>
-                    <li><a href="DetailProject.php?id=<?=$PROJECT_ID?>" class="entypo1-slide"><img height='30' src='pic/AW_Icon_V1-08.png'></img><span>&nbsp;<?=$PROJECT_NAME?></span></a></li>
-                <?php }} ?>
-                </ul>
-            </aside>
+            <li><a href="DetailProject.php?id=<?=$PROJECT_ID?>" class="entypo1-slide"><img height='30'
+                        src='pic/AW_Icon_V1-08.png'></img><span>&nbsp;<?=$PROJECT_NAME?></span></a></li>
+            <?php } ?>
+        </ul>
+    </aside>
 
-<?php require_once __DIR__.'/require/footer.php'; ?>	
-    <!-- Login Modal -->
+    <?php require_once __DIR__.'/require/footer.php'; ?>
+    </div>
+    </div>
+    <!-- End Login Modal -->
+
+    <div class="modal fade" id="PaymentReward" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterLabel">Buy for reward</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="https://www.t10assets.com/api/v1/ecommerce/payment/qrcode" method="POST" encypte="multipart/form-data" id="payment_reward">
+                    <div class="modal-body">
+                        <label for="col-form-label">Enter you donation :</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">฿</span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm" id="amount" name="amount" aria-describedby="basic-addon3" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Note :</label>
+                            <textarea class="form-control" id="NOTE" name="NOTE"></textarea>
+                        </div>                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="submit" name="submit" style="background: linear-gradient(-90deg, #003333,#009999); border-radius: 100px;
+                        padding: 5px 30px; width: 600px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ยืนยันการจ่ายเงิน</font></button>
+                        <input type="hidden" name="REWARD_ID" id="REWARD_ID">
+                        <input type="hidden" name="do" value="payment_reward">
+                        <input type="hidden" name="SUM_REWARD" value="1">
+                        <input type="hidden" name="REWARD_ID" id="REWARD_ID" value="<?=$REWARD_ID?>" />
+                        <input type="hidden" name="token" value="<?=$token?>">
+                        <input type="hidden" name="amount" id="amount">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -1024,13 +860,45 @@ div.single-input  {
                     </form>
                 </div>
             </div>
-        </div>    
+        </div>
+    </div>        
             <!-- End Sign up -->
 
                 
 </body>
+<?php require_once __DIR__.'/require/admin/script.php'; ?>
+<script>
+    $(document).ready(function() {
+        $('#PaymentReward').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var REWARD_ID = button.data('id')
+            var modal = $(this)
 
-<?php require_once __DIR__.'/require/script.php';?>
+            $.ajax({
+                type: "POST",
+                url: "SavePaymentReward.php",
+                data: {
+                    REWARD_ID: REWARD_ID,
+                    do: 'get_reward'
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response)
+                    var arr_input_key = ['amount']
+                    $.each(response, function(indexInArray, valueOfElement) {
+                        if (jQuery.inArray(indexInArray, arr_input_key) !== -1) {
+                            if (valueOfElement != '') {
+                                modal.find('input[name="' + indexInArray + '"]')
+                                    .val(valueOfElement)
+                            }
+                        }
+                    });
+                    modal.find('#REWARD_ID').val(REWARD_ID)
+                }
+            });
+        })
+    });
+</script>
 <script>
 $('#myGoal').stepProgressBar({
   currentValue: <?=$PROJECT_REAL?>,
@@ -1143,6 +1011,67 @@ function readURL(input) {
 </script>
 <script type="text/javascript">
     $(document).ready(function (e){
+        $("#payment_reward").on('submit',(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "SavePaymentReward.php",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(response) {
+                console.log(response)
+                if(response=="Error"){
+                    swal("", {
+                    icon: "warning",
+                });
+            }
+                if(response=="Success"){
+                    swal("Trading was successful.", {
+                    icon: "success",
+                    });
+                }
+            },
+                error: function(){} 	        
+            });
+        }));
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function (e){
+        $("#payment_reward").on('submit',(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(response) {
+                console.log(response)
+                if(response=="Error"){
+                    swal("", {
+                    icon: "warning",
+                });
+            }
+                if(response=="Success"){
+                    swal("Trading was successful.", {
+                    icon: "success",
+                });
+                    setTimeout(function(){
+                    window.location.href = "paymentqrcode.php";
+                    },5000);    
+                }
+            },
+                error: function(){} 	        
+            });
+        }));
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function (e){
         $("#register_form").on('submit',(function(e){
             e.preventDefault();
             $.ajax({
@@ -1186,11 +1115,6 @@ function readURL(input) {
                 if(response=="Error"){
                     swal("Email or Password was wrong!!", {
                     icon: "warning",
-                });
-            }
-                if(response=="Success"){
-                    swal("", {
-                    icon: "success",
                 });
             }
             location.reload();
