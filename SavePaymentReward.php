@@ -37,11 +37,33 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         case 'payment_reward':
 
         $REWARD_ID = $_POST['REWARD_ID'];   
-        $MINIMUM = $_POST['MINIMUM'];   
+        $amount = $_POST['amount'];   
         $NOTE = $_POST['NOTE'];   
         $SUM_REWARD = $_POST['SUM_REWARD'];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"$amount\",\n \"note\" : \"$NOTE\"\n}",
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json"
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $rpe = json_decode($response);
+        $qrcode = $rpe->rawQrCode;
           
-        $sql_insert = "INSERT INTO `reward_buy`(`REWARD_ID`, `AMOUNT`, `NOTE`, `MEMBER_ID`, `CREATE_AT`) VALUES ('$REWARD_ID', '$MINIMUM', '$NOTE', '$MEMBER_ID', current_timestamp())";
+        $sql_insert = "INSERT INTO `reward_buy`(`REWARD_ID`, `amount`, `NOTE`, `QRCODE`, `MEMBER_ID`, `CREATE_AT`) VALUES ('$REWARD_ID', '$amount', '$NOTE', '$qrcode', '$MEMBER_ID', current_timestamp())";
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());  
         
         $sql_select = "SELECT REWARD_SUM FROM project_reward WHERE REWARD_ID = :REWARD_ID";

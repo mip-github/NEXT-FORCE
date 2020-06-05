@@ -189,7 +189,7 @@ $row1=$stmt->fetch(PDO::FETCH_ASSOC);
                                         while($row1=$stmt1->fetch(PDO::FETCH_ASSOC)){
                                             $REWARD_ID = $row1['REWARD_ID'];
                                             $PROJECT_ID = $row1['PROJECT_ID'];
-                                            $MINIMUM = $row1['MINIMUM'];
+                                            $amount = $row1['amount'];
                                             $NAME = $row1['NAME'];
                                             $REWARD_SUM = $row1['REWARD_SUM'];
                                             $REWARD_MAX = $row1['REWARD_MAX'];
@@ -201,7 +201,7 @@ $row1=$stmt->fetch(PDO::FETCH_ASSOC);
                                                             <h6><?=$NAME?></h6>
                                                         </td>
                                                         <td>
-                                                            <h6><?=$MINIMUM?></h6>
+                                                            <h6><?=$amount?></h6>
                                                         </td>
                                                         <td>
                                                             <h6><?=$REWARD_SUM?></h6>

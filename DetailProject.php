@@ -40,6 +40,13 @@ $PROJECT_MAX = $PROJECT_PRICE * 100 / $PROJECT_PRICE;
 $PROJECT_SOFTCAP = $PROJECT_SOFT_CAP * 100 / $PROJECT_PRICE ;
 $PROJECT_HARDCAP = $PROJECT_HARD_CAP * 100 / $PROJECT_PRICE ;
 $PROJECT_REAL = $PROJECT_NUM_UNIT * 100 / $PROJECT_PRICE;
+
+$sql5 = "SELECT * FROM project_reward WHERE PROJECT_ID = :PROJECT_REWARD";
+$stmt5=$db->prepare($sql5);
+$stmt5->bindparam(':PROJECT_REWARD', $PROJECT_REWARD);
+$stmt5->execute();
+$row5=$stmt5->fetch(PDO::FETCH_ASSOC);
+    $REWARD_ID = $row4['REWARD_ID'];
 ?>
 
 
@@ -210,7 +217,7 @@ div.single-input {
         while($row4=$stmt4->fetch(PDO::FETCH_ASSOC)){
             $REWARD_ID = $row4['REWARD_ID'];
             $PROJECT_ID = $row4['PROJECT_ID'];
-            $MINIMUM = $row4['MINIMUM'];
+            $amount = $row4['amount'];
             $NAME = $row4['NAME'];
             $REWARD_SUM = $row4['REWARD_SUM'];
             $REWARD_MAX = $row4['REWARD_MAX'];
@@ -221,12 +228,13 @@ div.single-input {
                 <div class="card">
                     <div class="card-body">
                         <h1 class="card-title"><h4><b><i class="fa fa-award"></i> REWARD FROM CAMPAIGN</b></h4>
-                        <p class="card-text"><h5>MINIMUM <b><font style="color: #000;"><?=$MINIMUM?> ฿</font></b></h5></p>
+                        <p class="card-text"><h5>MINIMUM <b><font style="color: #000;"><?=$amount?> ฿</font></b></h5></p>
                         <p class="card-text"><h5><b><font style="color: #696969;">FUND FOR ME</font></b></h5></p>
                         <p class="card-text"><h5><?=$NAME?></h5></p>
                         <p class="card-text"><h5><i class="fa fa-user"></i> <?=$REWARD_SUM?> Claim of <?=$REWARD_MAX?></h5></p>
                         <p class="card-text"><h5><i class="fa fa-clock"></i> Estimated Delivery</h5></p>
                         <p class="card-text"><h5><b><font style="color: #000;"><?=$ESTIMATED?> </font></b></h5></p>
+
                         <?php 
                         
                         if($REWARD_SUM == $REWARD_MAX) {
@@ -238,8 +246,27 @@ div.single-input {
                         }                             
                         ?>
                     </div>
-                </div>
-            </div>
+        <?php
+
+        $sql6 = "SELECT * FROM reward_buy WHERE REWARD_ID = :REWARD_ID AND MEMBER_ID = :MEMBER_ID";
+        $stmt6=$db->prepare($sql6);
+        $stmt6->bindparam(':REWARD_ID', $REWARD_ID);
+        $stmt6->bindparam(':MEMBER_ID', $MEMBER_ID);
+        $stmt6->execute();
+        while($row6=$stmt6->fetch(PDO::FETCH_ASSOC)){ 
+            $ID = $row6['ID'];
+            $REWARD = $row6['REWARD_ID'];
+            $QRCODE = $row6['QRCODE'];
+            $MEMBER_REWARD = $row6['MEMBER_ID'];
+
+
+        ?>
+                    <div class="card-footer text-muted">
+                        <a href='paymentqrcode.php?id=<?=$REWARD_ID?>'><button type='button' style='background: #000; border-radius: 100px; padding: 5px 30px; width: 450px; height: 50px;'><font style='font-size: 18px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;'>คลิกเพื่อดู QR Code</font></button></a>
+                    </div>
+        <?php } ?>
+                </div>       
+            </div>  
         <?php } ?>
         </div>
     </div>    
@@ -299,7 +326,7 @@ div.single-input {
                         <input type="hidden" name="token" value="<?=$token?>">
                         <input type="hidden" name="amount" id="amount">
                     </div>
-                </form>
+                </form>       
             </div>
         </div>
     </div>
@@ -1060,9 +1087,7 @@ function readURL(input) {
                     swal("Trading was successful.", {
                     icon: "success",
                 });
-                    setTimeout(function(){
-                    window.location.href = "paymentqrcode.php";
-                    },5000);    
+                localtion.reload();  
                 }
             },
                 error: function(){} 	        
