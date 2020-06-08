@@ -1193,7 +1193,7 @@ function readURL(input) {
                     icon: "success",
                 });
             }
-            location.reload();
+          
             },
                 error: function(){} 	        
             });
