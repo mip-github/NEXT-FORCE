@@ -68,7 +68,6 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
     
                             $jwt = JWT::encode($token, $secret_key);
                                 echo "Success"; 
-                    
 
                         }else{
                             echo "Error";

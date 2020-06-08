@@ -33,7 +33,7 @@ $MEMBER_KYC = $row['MEMBER_KYC'];
 
 <!doctype html>
 <html class="no-js" lang="zxx">
-<?php require_once __DIR__ . '/require/head.php';?>
+<?php require_once __DIR__ . '/require/head_profile.php';?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>

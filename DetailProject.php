@@ -269,7 +269,7 @@ div.single-input {
             </div>  
         <?php } ?>
         </div>
-    </div>    
+    </div>  <br><br>  
     <aside id="sticky">
         <ul>
             <?php

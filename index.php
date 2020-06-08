@@ -1031,6 +1031,7 @@ div.single-input  {
 </body>
 
 <?php require_once __DIR__.'/require/script.php';?>
+<script src="require/script.js"></script>
 <script>
 $('#myGoal').stepProgressBar({
   currentValue: <?=$PROJECT_REAL?>,
@@ -1189,11 +1190,13 @@ function readURL(input) {
                 });
             }
                 if(response=="Success"){
-                    swal("", {
+                    swal("Login Success", {
                     icon: "success",
                 });
-            }
-          
+                    setTimeout(function() {
+                    window.location.href = "index.php";
+                    }, 2000);
+                }
             },
                 error: function(){} 	        
             });
