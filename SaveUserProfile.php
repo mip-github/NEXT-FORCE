@@ -147,9 +147,6 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
     
         $sql_insert = "INSERT INTO `project_buy`(`PROJECT_ID`, `REWARD_ID`, `MEMBER_ID`, `PRICE`, `NOTE`, `STATUS`, `CREATE_AT`) VALUES ('$PROJECT_ID', NULL, '$MEMBER_ID', '$PROJECT_NUM_UNIT', NULL, '0', current_timestamp())";
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());
-
-        $sql_insert1 = "INSERT INTO `files_buy`(`FILES`, `STATUS`, `DATE`, `TRANSFER_TYPE`, `BANK_NUMBER_CARD`, `BANK_TRANSFER`, `TOTAL`, `CREATE_BY`, `CREATE_AT`) VALUES (NULL, '0', NULL, NULL, NULL, NULL, NULL, '$MEMBER_ID', current_timestamp())";
-        $result_insert = mysqli_query($conn, $sql_insert1) or die(mysqli_error());
         
             echo "Success";
 
@@ -184,6 +181,9 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
 
         $sql = "INSERT INTO `payment_transaction`(`qrcode`, `amount`, `note`, `create_by`, `create_at`) VALUES ('$qrcode', '$amount', '$note', '$MEMBER_ID', current_timestamp())";
         $result = mysqli_query($conn, $sql) or die(mysqli_error());
+
+        $sql_insert1 = "INSERT INTO `files_buy`(`FILES`, `STATUS`, `DATE`, `TRANSFER_TYPE`, `BANK_NUMBER_CARD`, `BANK_TRANSFER`, `TOTAL`, `CREATE_BY`, `CREATE_AT`) VALUES (NULL, '0', NULL, NULL, NULL, NULL, NULL, '$MEMBER_ID', current_timestamp())";
+        $result_insert = mysqli_query($conn, $sql_insert1) or die(mysqli_error());
 
         echo "Success";
           

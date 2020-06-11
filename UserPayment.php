@@ -106,6 +106,39 @@ a.linkhover:hover {
     margin-bottom: 0em;
 }
 </style>
+<style>
+.btn1 {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 380px;
+  border-radius: 100px; padding: 5px 30px;
+  height: 45px;
+}
+
+.info {
+  border-color: #00CED1;
+  color: #00CED1;
+}
+
+.info:hover {
+  background: #00CED1;
+  color: white;
+}
+
+.dark {
+  border-color: #000;
+  color: #000;
+}
+
+.dark:hover {
+  background: #000;
+  color: white;
+}
+</style>
 
 <body bgcolor=''>
     <header>
@@ -509,10 +542,52 @@ a.linkhover:hover {
                                         </div>
                                     </div>
                                 </div>
+                                <?php 
+
+                                $sql7 = "SELECT * FROM files_buy WHERE CREATE_BY = :MEMBER_ID AND STATUS = 0";
+                                $stmt7=$db->prepare($sql7);
+                                $stmt7->bindparam(':MEMBER_ID', $MEMBER_ID);
+                                $stmt7->execute();
+                                $row7=$stmt7->fetch(PDO::FETCH_ASSOC);
+                                    $FILES = $row7['FILES'];
+                                    $CREATE_AT = $row7['CREATE_AT'];
+                                ?>
                                 <div id="menu2" class="tab-pane fade">
-                                    <h3>Menu 2</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam.</p>
+                                    <h3 align='left'>
+                                        <font style="color: #000; font-weight: 950;">สถานะการจ่ายเงิน</font>
+                                    </h3>
+                                    <h5 align='left'>
+                                        <font style="color: #000; font-weight: thin;">กรุณารอเจ้าหน้าที่ตรวจสอบหลักฐาน 1-2 วัน</font>
+                                    </h5>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h3 align='left'>
+                                                <button type="button" class="btn btn-warning">รอตรวจสอบเอกสาร</button>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <h3 align='left'>
+                                                <font style="color: #000; font-weight: 950;">วัน/เดือน/ปี เวลาที่โอน</font>
+                                            </h3>
+                                            <h5 align='left'>
+                                                <font style="color: #000; font-weight: 950;"><?=$CREATE_AT?></font>
+                                            </h5>
+                                            <h5 align='left'>
+                                                <img src="file_ico/payment/<?php echo $row7['FILES'];?>" style="height: 220px; width: 220px;">
+                                            </h5>
+                                            <h3 align='left'>
+                                                <font style="color: #000; font-weight: 950;">คุณสามารถดาวน์โหลดเอกสารได้ที่นี่</font>
+                                            </h3>
+                                            <h3 align='left'>
+                                                <button class="btn1 info">ดาวน์โหลดใบเสร็จ (PDF)</button>
+                                            </h3>
+                                            <h3 align='left'>
+                                                <button type="button" class="btn1 dark" onclick="history.back()">กลับสู่หน้าการซื้อขายของฉัน</button>
+                                            </h3>
+                                        </div>
+                                    </div>    
                                 </div>
                             </div>
                         </div>
