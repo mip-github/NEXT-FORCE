@@ -24,7 +24,7 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
               
         case 'get_reward':
 
-            $sql = "SELECT amount FROM project_reward WHERE REWARD_ID = :ID";
+            $sql = "SELECT * FROM project_reward WHERE REWARD_ID = :ID";
             $ID = $_POST["REWARD_ID"];
             $stmt=$db->prepare($sql);
             $stmt->bindparam(':ID',$ID);
@@ -40,30 +40,35 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         $amount = $_POST['amount'];   
         $NOTE = $_POST['NOTE'];   
         $SUM_REWARD = $_POST['SUM_REWARD'];
+        $REWARD = $_POST['reward'];
+        $PROJECT_ID = $_POST['PROJECT_ID'];
 
-        $curl = curl_init();
+        // print_r($_POST);
+        // die();
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"$amount\",\n \"note\" : \"$NOTE\"\n}",
-        CURLOPT_HTTPHEADER => array(
-            "Content-Type: application/json"
-        ),
-        ));
+        // $curl = curl_init();
 
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $rpe = json_decode($response);
-        $qrcode = $rpe->rawQrCode;
+        // curl_setopt_array($curl, array(
+        // CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
+        // CURLOPT_RETURNTRANSFER => true,
+        // CURLOPT_ENCODING => "",
+        // CURLOPT_MAXREDIRS => 10,
+        // CURLOPT_TIMEOUT => 0,
+        // CURLOPT_FOLLOWLOCATION => true,
+        // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        // CURLOPT_CUSTOMREQUEST => "POST",
+        // CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"$amount\",\n \"note\" : \"$NOTE\"\n}",
+        // CURLOPT_HTTPHEADER => array(
+        //     "Content-Type: application/json"
+        // ),
+        // ));
+
+        // $response = curl_exec($curl);
+        // curl_close($curl);
+        // $rpe = json_decode($response);
+        // $qrcode = $rpe->rawQrCode;
           
-        $sql_insert = "INSERT INTO `reward_buy`(`REWARD_ID`, `amount`, `NOTE`, `QRCODE`, `MEMBER_ID`, `CREATE_AT`) VALUES ('$REWARD_ID', '$amount', '$NOTE', '$qrcode', '$MEMBER_ID', current_timestamp())";
+        $sql_insert = "INSERT INTO `project_buy`(`PROJECT_ID`, `REWARD_ID`, `MEMBER_ID`, `PRICE`, `NOTE`, `STATUS`, `CREATE_AT`) VALUES ('$PROJECT_ID', '$REWARD_ID', '$MEMBER_ID', '$amount', '$NOTE', '0', current_timestamp())";
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());  
         
         $sql_select = "SELECT REWARD_SUM FROM project_reward WHERE REWARD_ID = :REWARD_ID";
@@ -74,7 +79,7 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         $REWARD_SUM = $row1['REWARD_SUM'];
         
         $TOTAL = $REWARD_SUM + $SUM_REWARD;
-
+        
         $sql_update = "UPDATE project_reward SET REWARD_SUM = '".$TOTAL."'
                                            WHERE REWARD_ID = '".$REWARD_ID."'"; 
         $result_update = mysqli_query($conn, $sql_update) or die(mysqli_error());                                   

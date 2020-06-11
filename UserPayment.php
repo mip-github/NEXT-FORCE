@@ -25,31 +25,14 @@ $row3=$stmt->fetch(PDO::FETCH_ASSOC);
 $PROJECT_PAYMENT = $row3['PROJECT_BUY_ID'];
 $PROJECT_JOIN = $row3['PROJECT_ID'];
 
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"2\",\n \"note\" : \"\"\n}",
-  CURLOPT_HTTPHEADER => array(
-    "Content-Type: application/json"
-  ),
-));
-
-$response = curl_exec($curl);
-curl_close($curl);
-$rpe = json_decode($response);
-$qrcode = $rpe->rawQrCode; 
-
+$sql5 = "SELECT * FROM payment_transaction WHERE create_by = :MEMBER_ID";
+$stmt5=$db->prepare($sql5);
+$stmt5->bindparam(':MEMBER_ID', $MEMBER_ID);
+$stmt5->execute();
+$row5=$stmt5->fetch(PDO::FETCH_ASSOC);
+$qrcode = $row5['qrcode'];
 
 ?>
-
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -260,7 +243,7 @@ a.linkhover:hover {
                             </div>
                             <div id="Mumbai1" class="tabcontent">
                                 <h3>Payment QR-Code</h3>
-                                <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=<?php echo($qrcode);?>" />
+                                <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=<?=$qrcode?>" />
                             </div>
                         </div>
                         <div class="form-group col-md-5">
@@ -272,50 +255,59 @@ a.linkhover:hover {
 
                                     <?php
 
+                                    $sql1 = "SELECT SUM(PRICE) as SUM FROM project_buy WHERE MEMBER_ID = :MEMBER_ID AND STATUS = 0";
+                                    $stmt=$db->prepare($sql1);
+                                    $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
+                                    $stmt->execute();
+                                    $row1=$stmt->fetch(PDO::FETCH_ASSOC);
+                                        $SUM = $row1['SUM'];
+                                        $SUM_VAT = $SUM * 7 / 100;
+                                        $PROJECT_SUM = number_format($SUM_VAT);   
 
-                                $sql1 = "SELECT SUM(PRICE) as SUM FROM project_buy WHERE MEMBER_ID = :MEMBER_ID AND STATUS = 0";
-                                $stmt=$db->prepare($sql1);
-                                $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
-                                $stmt->execute();
-                                $row1=$stmt->fetch(PDO::FETCH_ASSOC);
-                                    $SUM = $row1['SUM'];
-                                    $SUM_VAT = $SUM * 7 / 100;
-                                    $PROJECT_SUM = number_format($SUM_VAT); 
-
-                                $sql2 = "SELECT * FROM project WHERE PROJECT_ID = :PROJECT_JOIN";
-                                $stmt=$db->prepare($sql2);
-                                $stmt->bindparam(':PROJECT_JOIN', $PROJECT_JOIN);
-                                $stmt->execute();
-                                $row2=$stmt->fetch(PDO::FETCH_ASSOC);
-                                    $PROJECT_DLT = $row2['PROJECT_ID'];
-                                    $PROJECT_NAME = $row2['PROJECT_NAME'];
-                                    $PROJECT_NUM_UNIT = $row2['PROJECT_NUM_UNIT'];
-                                    $PROJECT_THB = number_format($PROJECT_NUM_UNIT);     
-                                
-                                $sql_project = "SELECT * FROM project_buy WHERE MEMBER_ID = :MEMBER_ID AND STATUS = 0";
-                                $stmt=$db->prepare($sql_project);
-                                $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
-                                $stmt->execute();
-                                while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
-                                    $PROJECT_BUY_ID = $row_project['PROJECT_BUY_ID'];
-                                    $PROJECT_ID = $row_project['PROJECT_ID'];
-                                    $SUM_VAT = $SUM * 7 / 100;
-                                    $PROJECT_SUM = number_format($SUM_VAT); 
-                                    $SUM_1 = $SUM + $SUM_VAT;
-                                    $SUM_TOTAL = number_format($SUM_1);
+                                    $sql2 = "SELECT * FROM project WHERE PROJECT_ID = :PROJECT_JOIN";
+                                    $stmt=$db->prepare($sql2);
+                                    $stmt->bindparam(':PROJECT_JOIN', $PROJECT_JOIN);
+                                    $stmt->execute();
+                                    $row2=$stmt->fetch(PDO::FETCH_ASSOC);
+                                        $PROJECT_DLT = $row2['PROJECT_ID'];
+                                        $PROJECT_NAME = $row2['PROJECT_NAME'];
+                                        $PROJECT_NUM_UNIT = $row2['PROJECT_NUM_UNIT'];
+                                        $PROJECT_THB = number_format($PROJECT_NUM_UNIT);   
+                                        
+                                        $space = ' ';
+                                        $REWARD = 'Reward';
                                     
-                                    $SUM_2 = '1';
+                                    $sql_project = "SELECT * FROM project_buy WHERE MEMBER_ID = :MEMBER_ID AND STATUS = 0";
+                                    $stmt=$db->prepare($sql_project);
+                                    $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
+                                    $stmt->execute();
+                                    while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
+                                        $PROJECT_BUY_ID = $row_project['PROJECT_BUY_ID'];
+                                        $PROJECT_ID = $row_project['PROJECT_ID'];
+                                        $REWARD_ID = $row_project['REWARD_ID'];
+                                        $PRICE = $row_project['PRICE'];
+                                        $SUM_VAT = $SUM * 7 / 100;
+                                        $PROJECT_SUM = number_format($SUM_VAT); 
+                                        $SUM_1 = $SUM + $SUM_VAT;
+                                        $SUM_TOTAL = number_format($SUM_1);
+                                        
 
-        
-                                    
-
-                                ?>
+                                        
+                                    ?>
 
                                     <div class="alert alert-info" role="alert">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <h4 align='left'>
-                                                    <font style="color: #000; font-weight: 950;"><?=$PROJECT_NAME?>
+                                                    <font style="color: #000; font-weight: 950;">
+                                                    <?php
+
+                                                    if($REWARD_ID > 0){
+                                                        echo "$PROJECT_NAME$space($REWARD)";
+                                                    }else{
+                                                        echo "$PROJECT_NAME";
+                                                    }
+                                                    ?>
                                                     </font>
                                                 </h4>
                                             </div>
@@ -326,12 +318,12 @@ a.linkhover:hover {
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <h4 align='left'>
-                                                    <font style="color: #000;"><?=$PROJECT_THB?> TCoin</font>
+                                                    <font style="color: #000;"><?=$PRICE?> TCoin</font>
                                                 </h4>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <h4 align='right'>
-                                                    <font style="color: #000;"><?=$PROJECT_THB?> THB</font>
+                                                    <font style="color: #000;"><?=$PRICE?> THB</font>
                                                 </h4>
                                             </div>
                                         </div>
@@ -376,8 +368,9 @@ a.linkhover:hover {
                                         <div class="form-row">
                                             <div class="form-group col-md-6" align='center'>
                                                 <input type="hidden" name="token" value="<?=$token?>">
-                                                <input type="hidden" name="amount" value="<?=$SUM_2?>">
-                                                <input type="hidden" name="note" value="ICO">
+                                                <input type="hidden" name="amount" value="<?=$SUM_1?>">
+                                                <input type="hidden" name="note" value="###NEXTFORCE###">
+                                                <input type="hidden" name="do" value="payment_reward">
                                                 <button type="submit" name="submit" id="submit"
                                                     style="background: #696969; border-radius: 100px; padding: 5px 30px;">
                                                     <font
@@ -403,39 +396,49 @@ a.linkhover:hover {
                                 $row1=$stmt->fetch(PDO::FETCH_ASSOC);
                                     $SUM = $row1['SUM'];
                                     $SUM_VAT = $SUM * 7 / 100;
-                                    $PROJECT_SUM = number_format($SUM_VAT); 
+                                    $PROJECT_SUM = number_format($SUM_VAT);   
 
                                 $sql2 = "SELECT * FROM project WHERE PROJECT_ID = :PROJECT_JOIN";
                                 $stmt=$db->prepare($sql2);
                                 $stmt->bindparam(':PROJECT_JOIN', $PROJECT_JOIN);
                                 $stmt->execute();
                                 $row2=$stmt->fetch(PDO::FETCH_ASSOC);
+                                    $PROJECT_DLT = $row2['PROJECT_ID'];
                                     $PROJECT_NAME = $row2['PROJECT_NAME'];
                                     $PROJECT_NUM_UNIT = $row2['PROJECT_NUM_UNIT'];
-                                    $PROJECT_THB = number_format($PROJECT_NUM_UNIT);     
-                                
+                                    $PROJECT_THB = number_format($PROJECT_NUM_UNIT);   
+                                    
+                                    $space = ' ';
+                                    $REWARD = 'Reward';
+
                                 $sql_project = "SELECT * FROM project_buy WHERE MEMBER_ID = :MEMBER_ID AND STATUS = 0";
                                 $stmt=$db->prepare($sql_project);
                                 $stmt->bindparam(':MEMBER_ID', $MEMBER_ID);
                                 $stmt->execute();
                                 while($row_project=$stmt->fetch(PDO::FETCH_ASSOC)){
-                                    $PROJECT_BUY_ID = $row['PROJECT_BUY_ID'];
+                                    $PROJECT_BUY_ID = $row_project['PROJECT_BUY_ID'];
                                     $PROJECT_ID = $row_project['PROJECT_ID'];
+                                    $REWARD_ID = $row_project['REWARD_ID'];
+                                    $PRICE = $row_project['PRICE'];
                                     $SUM_VAT = $SUM * 7 / 100;
                                     $PROJECT_SUM = number_format($SUM_VAT); 
                                     $SUM_1 = $SUM + $SUM_VAT;
-                                    $SUM_TOTAL = number_format($SUM_1); 
-
-        
+                                    $SUM_TOTAL = number_format($SUM_1);
                                     
-
                                 ?>
 
                                     <div class="alert alert-info" role="alert">
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 <h4 align='left'>
-                                                    <font style="color: #000; font-weight: 950;"><?=$PROJECT_NAME?>
+                                                    <font style="color: #000; font-weight: 950;">
+                                                    <?php
+                                                    if($REWARD_ID > 0){
+                                                        echo "$PROJECT_NAME$space($REWARD)";
+                                                    }else{
+                                                        echo "$PROJECT_NAME";
+                                                    }
+                                                    ?>
                                                     </font>
                                                 </h4>
                                             </div>
@@ -443,12 +446,12 @@ a.linkhover:hover {
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <h4 align='left'>
-                                                    <font style="color: #000;"><?=$PROJECT_THB?> TCoin</font>
+                                                    <font style="color: #000;"><?=$PRICE?> TCoin</font>
                                                 </h4>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <h4 align='right'>
-                                                    <font style="color: #000;"><?=$PROJECT_THB?> THB</font>
+                                                    <font style="color: #000;"><?=$PRICE?> THB</font>
                                                 </h4>
                                             </div>
                                         </div>
@@ -516,7 +519,7 @@ a.linkhover:hover {
                     </div>
                     <!-- </form> -->
                     </hr>
-                </div>
+                </div>        
             </div>
             <aside id="sticky-social">
                 <ul>
@@ -649,6 +652,38 @@ $(document).ready(function(e) {
     $("#payment_form1").on('submit', (function(e) {
         e.preventDefault();
         $.ajax({
+            url: "SaveUserProfile.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                console.log(response)
+                if (response == "Error") {
+                    swal("Function is Error!!", {
+                        icon: "warning",
+                    });
+                }
+                if (response == "Success") {
+                    swal("Payment Success.", {
+                        icon: "success",
+                    });
+                setTimeout(function(){
+                window.location.href = "UserPayment.php";
+                    },3000);    
+                }
+            },
+            error: function() {}
+        });
+    }));
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#payment_form1").on('submit', (function(e) {
+        e.preventDefault();
+        $.ajax({
             url: "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode.php",
             type: "POST",
             data: new FormData(this),
@@ -658,17 +693,17 @@ $(document).ready(function(e) {
             success: function(response) {
                 console.log(response)
                 if (response == "Error") {
-                    swal("", {
+                    swal("Function is Error!!", {
                         icon: "warning",
                     });
                 }
                 if (response == "Success") {
-                    swal("บันทึกข้อมูลเสร็จสิ้น", {
+                    swal("Payment Success.", {
                         icon: "success",
                     });
                 setTimeout(function(){
                 window.location.href = "UserPayment.php";
-                    },5000);    
+                    },3000);    
                 }
             },
             error: function() {}

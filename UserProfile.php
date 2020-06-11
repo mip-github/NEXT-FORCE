@@ -39,7 +39,7 @@ $stmt=$db->prepare($sql3);
 $stmt->bindparam(':AMPHURE_ID', $AMPHURE_ID);
 $stmt->execute();
 $row2=$stmt->fetch(PDO::FETCH_ASSOC);
-$AP_NAME = $row2['name_th'];
+$AP_NAME = $row2['name_th1'];
 $AMPHURES_ID = $row2['id'];
 
 $sql4 = "SELECT * FROM districts WHERE id = :DISTRINCT_ID";
@@ -47,7 +47,7 @@ $stmt=$db->prepare($sql4);
 $stmt->bindparam(':DISTRINCT_ID', $DISTRINCT_ID);
 $stmt->execute();
 $row3=$stmt->fetch(PDO::FETCH_ASSOC);
-$DT_NAME = $row3['name_th'];
+$DT_NAME = $row3['name_th2'];
 
 
 
@@ -151,7 +151,7 @@ $DT_NAME = $row3['name_th'];
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="font12">แขวง/ตำบล</div><br>
-                                <select name="district_id" id="district"data-where="4" class="ajax_address form-control form-control-lg">
+                                <select id="district" name="district_id" data-where="4" class="ajax_address form-control form-control-lg">
                                     <option value=""><?=$DT_NAME?></option>
                                 </select>
                             </div>
@@ -199,7 +199,40 @@ $DT_NAME = $row3['name_th'];
 
 <?php require_once __DIR__ . '/require/script.php'; ?>
 <script src="require/jquery.min.js"></script>
-<script src="require/script.js"></script>
+<script type="text/javascript">
+$(function() {
+    var provinceObject = $('#province');
+    var amphureObject = $('#amphure');
+    var districtObject = $('#district');
+    // on change province
+    provinceObject.on('change', function() {
+        var provinceId = $(this).val();
+        amphureObject.html('<option value="">เลือกเขต/อำเภอ</option>');
+        districtObject.html('<option value="">เลือกแขวง/ตำบล</option>');
+        $.get('get_amphur.php?province_id=' + provinceId, function(data) {
+            var result = JSON.parse(data);
+            $.each(result, function(index, item) {
+                amphureObject.append(
+                    $('<option></option>').val(item.id).html(item.name_th1)
+                );
+            });
+        });
+    });
+    // on change amphure
+    amphureObject.on('change', function() {
+        var amphureId = $(this).val();
+        districtObject.html('<option value="">เลือกแขวง/ตำบล</option>');
+        $.get('get_district.php?amphure_id=' + amphureId, function(data) {
+            var result = JSON.parse(data);
+            $.each(result, function(index, item) {
+                districtObject.append(
+                    $('<option></option>').val(item.id).html(item.name_th2)
+                );
+            });
+        });
+    });
+});
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>

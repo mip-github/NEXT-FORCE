@@ -469,15 +469,15 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label for="inputEmail4">จังหวัด</label>
-                                                    <input type="text" class="form-control" id="PROVINCE_ID" name="name_pro">
+                                                    <input type="text" class="form-control" id="PROVINCE_ID" name="name_th">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="inputEmail4">เขต/อำเภอ</label>
-                                                    <input type="text" class="form-control" id="AMPHURE_ID" name="name_am">
+                                                    <input type="text" class="form-control" id="AMPHURE_ID" name="name_th1">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="inputEmail4">แขวง/ตำบล</label>
-                                                    <input type="text" class="form-control" id="DISTRINCT_ID" name="name_th">
+                                                    <input type="text" class="form-control" id="DISTRINCT_ID" name="name_th2">
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -570,7 +570,7 @@ $MEMBER_PHOTO_1 = $rpe->MEMBER_PHOTO;
                     console.log(response)
                     var arr_input_key = ['MEMBER_ID', 'MEMBER_MAIL', 'MEMBER_BIRTH', 'MEMBER_TEL',
                         'MEMBER_GENDER', 'MEMBER_HOUSE', 'MEMBER_VILLAGE','MEMBER_ALLEY',
-                        'name_pro', 'name_am', 'name_th', 'POSTCODE_ID',
+                        'name_th', 'name_th1', 'name_th2', 'POSTCODE_ID',
                         'BANK_ID','BANK_BRANCH', 'ACCOUNT_TYPE_NAME', 'ACCOUNT_BANK_NUMBER',
                         'ACCOUNT_BANK_NAME', 'MEMBER_PHOTO'
                     ]

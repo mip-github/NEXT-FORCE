@@ -396,7 +396,7 @@ $row1=$stmt->fetch(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-<?php require_once __DIR__.'/require/admin/script.php'; ?>
+<?php require_once __DIR__.'/require/admin/jquery.php'; ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {

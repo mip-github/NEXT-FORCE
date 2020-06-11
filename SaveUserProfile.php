@@ -145,7 +145,7 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         $PROJECT_NUM_UNIT = $row['PROJECT_NUM_UNIT'];
     
-        $sql_insert = "INSERT INTO project_buy(PROJECT_ID, MEMBER_ID, STATUS, PRICE, CREATE_AT) VALUES ('$PROJECT_ID', '$MEMBER_ID', '0', '$PROJECT_NUM_UNIT', current_timestamp())";
+        $sql_insert = "INSERT INTO `project_buy`(`PROJECT_ID`, `REWARD_ID`, `MEMBER_ID`, `PRICE`, `NOTE`, `STATUS`, `CREATE_AT`) VALUES ('$PROJECT_ID', NULL, '$MEMBER_ID', '$PROJECT_NUM_UNIT', NULL, '0', current_timestamp())";
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());
 
         $sql_insert1 = "INSERT INTO `files_buy`(`FILES`, `STATUS`, `DATE`, `TRANSFER_TYPE`, `BANK_NUMBER_CARD`, `BANK_TRANSFER`, `TOTAL`, `CREATE_BY`, `CREATE_AT`) VALUES (NULL, '0', NULL, NULL, NULL, NULL, NULL, '$MEMBER_ID', current_timestamp())";
@@ -153,7 +153,42 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         
             echo "Success";
 
-        break;   
+        break;
+        
+        case 'payment_reward';
+
+        $amount = $_POST['amount'];
+        $note = $_POST['note'];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://www.t10assets.com/api/v1/ecommerce/payment/qrcode",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS =>"{\n \"token\" : \"40b993475cc3a8223b20a7cb602cccc9\",\n \"amount\" : \"$amount\",\n \"note\" : \"$NOTE\"\n}",
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json"
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $rpe = json_decode($response);
+        $qrcode = $rpe->rawQrCode;
+
+        $sql = "INSERT INTO `payment_transaction`(`qrcode`, `amount`, `note`, `create_by`, `create_at`) VALUES ('$qrcode', '$amount', '$note', '$MEMBER_ID', current_timestamp())";
+        $result = mysqli_query($conn, $sql) or die(mysqli_error());
+
+        echo "Success";
+          
+
+        break;
 
         case 'payment':
         

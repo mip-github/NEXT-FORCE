@@ -262,7 +262,7 @@ div.single-input {
 
         ?>
                     <div class="card-footer text-muted">
-                        <a href='paymentqrcode.php?id=<?=$REWARD_ID?>'><button type='button' style='background: #000; border-radius: 100px; padding: 5px 30px; width: 450px; height: 50px;'><font style='font-size: 18px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;'>คลิกเพื่อดู QR Code</font></button></a>
+                        <a href='paymentqrcode.php?id=<?=$REWARD_ID?>'><button type='button' style='background: #000; border-radius: 100px; padding: 5px 30px; width: 345px; height: 50px;'><font style='font-size: 18px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;'>คลิกเพื่อดู QR Code</font></button></a>
                     </div>
         <?php } ?>
                 </div>       
@@ -302,7 +302,7 @@ div.single-input {
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="https://www.t10assets.com/api/v1/ecommerce/payment/qrcode" method="POST" encypte="multipart/form-data" id="payment_reward">
+                <form action="SavePaymentReward.php" method="POST" encypte="multipart/form-data" id="payment_reward">
                     <div class="modal-body">
                         <label for="col-form-label">Enter you donation :</label>
                         <div class="input-group mb-3">
@@ -321,8 +321,9 @@ div.single-input {
                         padding: 5px 30px; width: 600px;"><font style="font-size: 24px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;">ยืนยันการจ่ายเงิน</font></button>
                         <input type="hidden" name="REWARD_ID" id="REWARD_ID">
                         <input type="hidden" name="do" value="payment_reward">
+                        <input type="hidden" name="PROJECT_ID" id="PROJECT_ID">
+                        <input type="hidden" name="reward" value="reward">
                         <input type="hidden" name="SUM_REWARD" value="1">
-                        <input type="hidden" name="REWARD_ID" id="REWARD_ID" value="<?=$REWARD_ID?>" />
                         <input type="hidden" name="token" value="<?=$token?>">
                         <input type="hidden" name="amount" id="amount">
                     </div>
@@ -911,7 +912,7 @@ div.single-input {
                 dataType: "json",
                 success: function(response) {
                     console.log(response)
-                    var arr_input_key = ['amount']
+                    var arr_input_key = ['amount', 'PROJECT_ID']
                     $.each(response, function(indexInArray, valueOfElement) {
                         if (jQuery.inArray(indexInArray, arr_input_key) !== -1) {
                             if (valueOfElement != '') {
@@ -981,26 +982,26 @@ $(document).ready(function() {
     });
 });
 </script>
-<!-- <script>
+<script>
 // $( document ).ready(function() {
 //     console.log( "1234" );
+// // });
+// $("#payment_reward").submit(function(event) {
+//     var _this = $(this)
+//     $.ajax({
+//         type: "POST",
+//         url: "register_query.php",
+//         data: _this.serialize(),
+//         //dataType: "json",
+//         success: function(response) {
+//             console.log(response)
+//             alert('Complete Update Profile')
+//             // location.reload();
+//         }
+//     })
+//     event.preventDefault();
 // });
-$("#register_form").submit(function(event) {
-    var _this = $(this)
-    $.ajax({
-        type: "POST",
-        url: "register_query.php",
-        data: _this.serialize(),
-        //dataType: "json",
-        success: function(response) {
-            console.log(response)
-            // alert('Complete Update Profile')
-            // location.reload();
-        }
-    })
-    event.preventDefault();
-});
-</script> -->
+</script>
 <script>
 $.validate({
     modules: 'security, file',
@@ -1058,6 +1059,9 @@ function readURL(input) {
                     swal("Trading was successful.", {
                     icon: "success",
                     });
+                    setTimeout(function(){
+                    window.location.href = "UserPayment.php";
+                    },3000);
                 }
             },
                 error: function(){} 	        
@@ -1065,7 +1069,7 @@ function readURL(input) {
         }));
     });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function (e){
         $("#payment_reward").on('submit',(function(e){
             e.preventDefault();
@@ -1094,7 +1098,7 @@ function readURL(input) {
             });
         }));
     });
-</script>
+</script> -->
 <script type="text/javascript">
     $(document).ready(function (e){
         $("#register_form").on('submit',(function(e){

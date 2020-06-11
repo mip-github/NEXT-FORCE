@@ -32,6 +32,9 @@
                                 <div class="nav-item">
                                     <a href="admin-appeal.php"><i class="fas fa-comments"></i> <span class="text-center">Appreal</span> </a>
                                 </div>
+                                <div class="nav-item">
+                                    <a href="admin-appeal.php"><i class="fas fa-users"></i> <span class="text-center">Manage Users</span> </a>
+                                </div>
 								<div class="nav-item">
                                     <a href="admin-logout.php"><i class="fas fa-sign-out-alt"></i> <span class="text-center">Logout</span> </a>
                                 </div>

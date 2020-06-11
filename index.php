@@ -106,7 +106,36 @@ div.single-input  {
   display: block;
 }
 </style>
+<style>
 
+            .demoInputBox {
+                padding: 7px;
+                border: #F0F0F0 1px solid;
+                border-radius: 4px;
+            }
+
+            #password-strength-status {
+                padding: 5px 10px;
+                color: #FFFFFF;
+                border-radius: 4px;
+                margin-top: 5px;
+            }
+
+            .medium-password {
+                background-color: #b7d60a;
+                border: #BBB418 1px solid;
+            }
+
+            .weak-password {
+                background-color: #ce1d14;
+                border: #AA4502 1px solid;
+            }
+
+            .strong-password {
+                background-color: #12CC1A;
+                border: #0FA015 1px solid;
+            }
+</style>
 <body>
     <header> <?php include_once 'require/header.php'; ?> </header>
     <!-- header-end -->
@@ -474,7 +503,7 @@ div.single-input  {
             <div class="modal-content">
                 <form action="function_login.php" method="POST" id="login_form" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <img src="pic/bg_2.png" class="rounded float-left img-fluid" alt="..." style="width: 500px; height: 685px;">
+                        <img src="pic/bg_2.png" class="rounded float-left img-fluid" alt="..." style="width: 300px; height: 685px;">
                             <div class="container"><br>
                                 <h1 class="a">&emsp;เข้าสู่ระบบ</h1>
                                 <div class="a">&emsp;&emsp;&emsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh <br>
@@ -559,8 +588,8 @@ div.single-input  {
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img src="pic/bg_2.png" class="rounded float-left img-fluid" alt="..." style="width: 500px; height: 685px;">
-                    <form action="register_query.php" method="POST" id="register_form" enctype="multipart/form-data">
+                    <img src="pic/bg_2.png" class="rounded float-left img-fluid" alt="..." style="width: 300px; height: 685px;">
+                    <form action="register_query.php" method="POST" id="register_form" enctype="multipart/form-data" >
                         <div id="first">
                             <div class="form">
                                 <div class="row">
@@ -592,7 +621,7 @@ div.single-input  {
                                                         ชื่อ</font>
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_NAME" id="MEMBER_NAME"
-                                                placeholder="กรอกชื่อของคุณ" data-validation="required">
+                                                placeholder="กรอกชื่อของคุณ" data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
@@ -604,7 +633,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_SURNAME"
                                                 id="MEMBER_SURNAME" placeholder="กรอกนามสกุลของคุณ"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -615,7 +644,7 @@ div.single-input  {
                                                         เพศ</font>
                                                 </b></label>
                                             <select class="form-control form-control-md" name="MEMBER_GENDER"
-                                                id="MEMBER_GENDER" data-validation="required">
+                                                id="MEMBER_GENDER" data-validation="required" required>
                                                 <option value="">เลือกเพศ</option>
                                                 <option value="ชาย">ชาย</option>
                                                 <option value="หญิง">หญิง</option>
@@ -631,7 +660,7 @@ div.single-input  {
                                                         วัน/เดือน/ปีเกิด</font>
                                                 </b></label>
                                             <input type="date" class="form-control" name="MEMBER_BIRTH"
-                                                id="MEMBER_BIRTH" data-validation="required">
+                                                id="MEMBER_BIRTH">
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
@@ -643,7 +672,7 @@ div.single-input  {
                                                         เบอร์โทรศัพท์</font>
                                                 </b></label>
                                             <input type="number" class="form-control" name="MEMBER_TEL" id="MEMBER_TEL"
-                                                placeholder="กรอกเบอร์โทรศัพท์ของคุณ" data-validation="required">
+                                                placeholder="กรอกเบอร์โทรศัพท์ของคุณ" data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -666,7 +695,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_HOUSE"
                                                 id="MEMBER_HOUSE" placeholder="กรอกบ้านเลขที่ของคุณ"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -678,7 +707,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_VILLAGE"
                                                 id="MEMBER_VILLAGE" placeholder="กรอกหมู่บ้านของคุณ"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -690,7 +719,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_ALLEY"
                                                 id="MEMBER_ALLEY" placeholder="กรอกซอยของคุณ"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-3"><br>
@@ -714,7 +743,7 @@ div.single-input  {
                                                     อำเภอ/เขต</font>
                                             </b></label>
                                         <select name="amphure_id" id="amphure" class="form-control form-control-md"
-                                            data-validation="required">
+                                            data-validation="required" required>
                                             <option value="">เลือกอำเภอ/เขต</option>
                                         </select>
                                     </div>
@@ -725,7 +754,7 @@ div.single-input  {
                                                     ตำบล/แขวง</font>
                                             </b></label>
                                         <select name="district_id" id="district" class="form-control form-control-md"
-                                            data-validation="required">
+                                            data-validation="required" required>
                                             <option value="">เลือกตำบล/แขวง</option>
                                         </select>
                                     </div>
@@ -740,7 +769,7 @@ div.single-input  {
                                                     </b></label>
                                                 <input type="text" class="form-control" name="MEMBER_POSTCODE"
                                                     id="MEMBER_POSTCODE" placeholder="กรอกรหัสไปรษณีย์"
-                                                    data-validation="required">
+                                                    data-validation="required" required>
                                             </div>
                                         </div>
                                     </div>
@@ -844,7 +873,7 @@ div.single-input  {
                                                         สาขาที่ใช้เปิดบริการ</font>
                                                 </b></label>
                                             <input type="text" class="form-control" name="BANK_BRANCH"
-                                                id="BANK_BRANCH" placeholder="สาขา">
+                                                id="BANK_BRANCH" placeholder="สาขา" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -877,7 +906,7 @@ div.single-input  {
                                                         หมายเลขบัญชี</font>
                                                 </b></label>
                                             <input type="text" class="form-control" name="ACCOUNT_BANK_NUMBER"
-                                                id="ACCOUNT_BANK_NUMBER" data-validation="required" placeholder="กรอกเลขที่บัญชีธนาคาร">
+                                                id="ACCOUNT_BANK_NUMBER" data-validation="required" placeholder="กรอกเลขที่บัญชีธนาคาร" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -890,7 +919,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="ACCOUNT_BANK_NAME"
                                                 id="ACCOUNT_BANK_NAME" placeholder="กรอกชื่อบัญชี"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -913,7 +942,7 @@ div.single-input  {
                                                 </b></label>
                                             <input type="text" class="form-control" name="MEMBER_EMAIL"
                                                 id="MEMBER_EMAIL" placeholder="กรอกอีเมลของคุณ"
-                                                data-validation="required">
+                                                data-validation="required" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -925,8 +954,9 @@ div.single-input  {
                                                 </b></label>
                                             <input type="password" class="form-control" name="MEMBER_PASSWORD"
                                                 id="MEMBER_PASSWORD" placeholder="รหัสผ่าน 6 ตัวขึ้นไป"
-                                                data-validation="required">
+                                                data-validation="strength" data-validation-strength="2" required>
                                         </div>
+                                        <div id="error-nwl"></div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="input-group-md">
@@ -935,9 +965,9 @@ div.single-input  {
                                                         style="color: #000000; font-size: 18px; font-family: 'DB Heavent', DB Heavent;">
                                                         ยืนยันรหัสผ่าน</font>
                                                 </b></label>
-                                            <input type="password" class="form-control" name="MEMBER_PASSWORD"
-                                                id="MEMBER_PASSWORD" placeholder="รหัสผ่าน 6 ตัวขึ้นไป"
-                                                data-validation="required">
+                                            <input type="password" class="form-control" name="MEMBER_PASSWORD1"
+                                                id="MEMBER_PASSWORD1" placeholder="รหัสผ่าน 6 ตัวขึ้นไป"
+                                                data-validation="confirmation" required>
                                         </div>
                                     </div>
                                 </div>
@@ -981,7 +1011,7 @@ div.single-input  {
                                                     </b></label>
                                                 <input type="text" class="form-control" name="MEMBER_ID" id="MEMBER_ID"
                                                     placeholder="กรอกเลขที่บัตรประชาชน/หนังสือเดินทาง"
-                                                    data-validation="required">
+                                                    data-validation="required" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -1031,7 +1061,54 @@ div.single-input  {
 </body>
 
 <?php require_once __DIR__.'/require/script.php';?>
+<?php require_once __DIR__.'/require/timecircle.php';?>
+<script src="validator/jquery.form.validator.min.js"></script>
+<script src="validator/security.js"></script>
+<script src="validator/file.js"></script>
 <script src="require/script.js"></script>
+<script src="src/jquery.stepProgressBar.js"></script>
+<script>
+            $.validate({
+                modules: 'security, file',
+                onModulesLoaded: function () {
+                    $('input[name="MEMBER_PASSWORD"]').displayPasswordStrength();
+                }
+            });
+        </script>
+<script type="text/javascript">
+$(function() {
+    var provinceObject = $('#province');
+    var amphureObject = $('#amphure');
+    var districtObject = $('#district');
+    // on change province
+    provinceObject.on('change', function() {
+        var provinceId = $(this).val();
+        amphureObject.html('<option value="">เลือกเขต/อำเภอ</option>');
+        districtObject.html('<option value="">เลือกแขวง/ตำบล</option>');
+        $.get('get_amphur.php?province_id=' + provinceId, function(data) {
+            var result = JSON.parse(data);
+            $.each(result, function(index, item) {
+                amphureObject.append(
+                    $('<option></option>').val(item.id).html(item.name_th1)
+                );
+            });
+        });
+    });
+    // on change amphure
+    amphureObject.on('change', function() {
+        var amphureId = $(this).val();
+        districtObject.html('<option value="">เลือกแขวง/ตำบล</option>');
+        $.get('get_district.php?amphure_id=' + amphureId, function(data) {
+            var result = JSON.parse(data);
+            $.each(result, function(index, item) {
+                districtObject.append(
+                    $('<option></option>').val(item.id).html(item.name_th2)
+                );
+            });
+        });
+    });
+});
+</script>
 <script>
 $('#myGoal').stepProgressBar({
   currentValue: <?=$PROJECT_REAL?>,
@@ -1085,34 +1162,6 @@ $(document).ready(function() {
         $("#fourth").hide();
         $("#third").show();
     });
-});
-</script>
-<!-- <script>
-// $( document ).ready(function() {
-//     console.log( "1234" );
-// });
-$("#register_form").submit(function(event) {
-    var _this = $(this)
-    $.ajax({
-        type: "POST",
-        url: "register_query.php",
-        data: _this.serialize(),
-        //dataType: "json",
-        success: function(response) {
-            console.log(response)
-            // alert('Complete Update Profile')
-            // location.reload();
-        }
-    })
-    event.preventDefault();
-});
-</script> -->
-<script>
-$.validate({
-    modules: 'security, file',
-    onModulesLoaded: function() {
-        $('input[name="pass_confirmation"]').displayPasswordStrength();
-    }
 });
 </script>
 <script type="text/javascript">

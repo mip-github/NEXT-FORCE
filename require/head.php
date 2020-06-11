@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/theme.min.css">
     <link rel="stylesheet" href="css/theme3.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font.css">
     
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet" type="text/css">

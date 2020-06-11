@@ -33,7 +33,9 @@ $QRCODE = $row['QRCODE'];
                     <div class="col-lg-5 col-md-6">
                         <div class="boxed-box01">
                             <div class="font04">QR Code - Payment</div>
-                            <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=<?=$QRCODE?>" style="height: 350px;"/>
+                            <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=<?=$QRCODE?>" style="height: 330px;"/>
+                            <br><br>
+                            <button type='button' style='background: #3399ff; border-radius: 100px; border-color: #3399ff; padding: 5px 30px; width: 345px; height: 50px;' onclick="history.back()"><font style='font-size: 18px; color: #ffffff; font-family: 'DB Heavent', DB Heavent;'>ย้อนกลับ</font></button>
                         </div>
                     </div>
                 </div>

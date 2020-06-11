@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
-        <<?php require_once __DIR__ . '/require/admin/head.php';?> 
+        <?php require_once __DIR__ . '/require/admin/head.php';?> 
     </head>
 
     <body>
@@ -15,17 +15,17 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
                         <div class="authentication-form mx-auto">
-                            <div class="logo-centered">
-                                <a href=""><img src="pic/logo.png" alt="" style="width: 100px; margin-right: 20px;"></a>
-                            </div>
-                            <h3>Sign In to Admin ICO Kalungka</h3>
+                            <div class="sign-btn text-center">
+                                <a href=""><img src="pic/nextforce1.png" alt="" class="rounded mx-auto d-block" style="width: 300px; margin-right: 20px; height: 50px;"></a>
+                            </div><br><br>
+                            <h3>NEXTFORCE - Admin</h3>
                             <form action="AdminLoginQuery.php" method="POST" id="login_form" encypte="multipart/form-data">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email" required="" name="STAFF_MAIL" id="STAFF_MAIL">
+                                    <input type="text" class="form-control" placeholder="Email" required="" name="email" id="email">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" required="" name="STAFF_PASSWORD" id="STAFF_PASSWORD">
+                                    <input type="password" class="form-control" placeholder="Password" required="" name="password" id="password">
                                     <i class="ik ik-lock"></i>
                                 </div>
                                 <div class="row">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-<?php require_once __DIR__.'/require/admin/script.php'; ?>
+<?php require_once __DIR__.'/require/admin/jquery.php'; ?>
 <script>
     $(document).ready(function (e){
         $("#login_form").on('submit',(function(e){
@@ -63,15 +63,20 @@
                 processData:false,
                 success: function(response) {
                 console.log(response)
-                if(response=="Error"){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        footer: '<a href>Why do I have this issue?</a>'
-                        })
-                    }
-                },
+                    if(response=="Error"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: 'Email or passwrd not valid!'
+                            })
+                        }
+                    if(response=="Success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login Success'
+                            })
+                        }
+                    },
                 error: function(){} 	        
             });
         }));
