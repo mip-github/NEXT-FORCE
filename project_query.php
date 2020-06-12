@@ -38,7 +38,7 @@ if(isset($_POST["do"]) && $_POST["do"] != "" ){
         }else{
 
         $sql_insert = "INSERT INTO `project`(`PROJECT_NUMBER`, `PROJECT_NAME`, `PROJECT_DETAIL`, `PROJECT_STATUS`, `PROJECT_DATE`, `PROJECT_PRICE`, `PROJECT_NUM_UNIT`, `PROJECT_SOFT_CAP`, `PROJECT_HARD_CAP`, `PROJECT_START`, `PROJECT_END`, `PROJECT_TIMELINE`) 
-                       VALUES ('$PROJECT_NUMBER', '$PROJECT_NAME', '$PROJECT_DETAIL', 'เริ่มโครงการ', '$PROJECT_DATE', '$PROJECT_PRICE', '$PROJECT_NUM_UNIT', '$PROJECT_SOFT_CAP', '$PROJECT_HARD_CAP', '$PROJECT_START', '$PROJECT_END', NULL)";
+                       VALUES ('$PROJECT_NUMBER', '$PROJECT_NAME', '$PROJECT_DETAIL', 'เริ่มโครงการ', '$PROJECT_DATE', '$PROJECT_PRICE', '$PROJECT_NUM_UNIT', '$PROJECT_SOFT_CAP', '$PROJECT_HARD_CAP', '$PROJECT_START', '$PROJECT_END', '$newname')";
 
         $result_insert = mysqli_query($conn, $sql_insert) or die(mysqli_error());
 

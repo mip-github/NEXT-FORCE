@@ -614,7 +614,7 @@ pre code {
 
 @media (min-width:1200px) {
     .container {
-        max-width: 1140px
+        max-width: 1140px;
     }
 }
 
@@ -9205,8 +9205,8 @@ a.text-dark:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         box-shadow: none!important
     }
