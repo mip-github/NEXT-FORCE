@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kalungka</title>
+    <title>NEXTFORCE</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/theme3.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font.css">
+    <link href="dist/css1/style.css" rel="stylesheet">
     
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet" type="text/css">

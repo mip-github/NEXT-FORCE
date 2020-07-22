@@ -182,7 +182,7 @@ div.single-input {
                     <div class="col-lg-5 col-md-6">
                         <div class="boxed-box01">
                             <div class="font04">Kalungka CIO Finishes in:</div>
-                            <div data-date="<?=$PROJECT_COUNTDOWN?>" id="count-down"></div>
+                            <div data-date="<?=$PROJECT_COUNTDOWN?>" id="DateCountdown"></div>
 
                             <div>
                                 <button class="btn6" type="submit">Buy coin 15% off</button></br>
@@ -895,6 +895,36 @@ div.single-input {
                 
 </body>
 <?php require_once __DIR__.'/require/admin/script.php'; ?>
+<script>
+$("#DateCountdown").TimeCircles({
+    "animation": "smooth",
+    "bg_width": 1.1,
+    "fg_width": 0.1,
+    "circle_bg_color": "#385c5e",
+    "time": {
+        "Days": {
+            "text": "Days",
+            "color": "#daf3f4",
+            "show": true
+        },
+        "Hours": {
+            "text": "Hours",
+            "color": "#daf3f4",
+            "show": true
+        },
+        "Minutes": {
+            "text": "Minutes",
+            "color": "#daf3f4",
+            "show": true
+        },
+        "Seconds": {
+            "text": "Seconds",
+            "color": "#daf3f4",
+            "show": true
+        }
+    }
+});
+</script>
 <script>
     $(document).ready(function() {
         $('#PaymentReward').on('show.bs.modal', function(event) {
